@@ -148,11 +148,11 @@
 \fi
 %
 %% Spacing (Flynn 2.4.1.2) %%
-\setlength\smallskipamount{3\p@ \@plus 1\p@ \@minus 1\p@}
-\setlength\medskipamount{6\p@ \@plus 2\p@ \@minus 2\p@}
-\setlength\bigskipamount{12\p@ \@plus 4\p@ \@minus 4\p@}
-\setlength\headheight{12\p@}
-\setlength\headsep   {25\p@}
+\setlength\smallskipamount{3.25\p@ \@plus 1\p@ \@minus 1\p@}
+\setlength\medskipamount{6.5\p@ \@plus 2\p@ \@minus 2\p@}
+\setlength\bigskipamount{13\p@ \@plus 4\p@ \@minus 4\p@}
+\setlength\headheight{13\p@}
+\setlength\headsep   {26\p@}
 \setlength\topskip   {10\p@}
 \setlength\footskip{30\p@}
 \setlength\maxdepth{.5\topskip}
