@@ -275,7 +275,7 @@
 % End input based on standard LaTeX distribution of `size10.clo'
 %
 %% Paragraph spacing and penalties (Flynn 2.4.1, 2.4.2) %%
-\setlength\lineskip{1\p@}
+\setlength\lineskip{1\p@} % makes negative leading impossible
 \setlength\normallineskip{1\p@}
 \renewcommand\baselinestretch{}
 \setlength\parskip{0\p@ \@plus \p@}
@@ -555,12 +555,12 @@
         \begin{center}%
           {\bfseries \abstractname\vspace{-.5em}\vspace{\z@}}%
         \end{center}%
-        \quotation
+        \quotation\noindent\ignorespaces % remove initial par indent, with Flynn 2.7
       \fi}
       {\if@twocolumn\else\endquotation\fi}
 \fi
 %
-%% Structural elements (Flynn 2.8) %%
+%% Quotation environments (Flynn 2.8) %%
 \newenvironment{verse}
                {\let\\\@centercr
                 \list{}{\itemsep      \z@
@@ -572,7 +572,7 @@
                {\endlist}
 \newenvironment{quotation}
                {\list{}{\listparindent 1.5em%
-                        \itemindent    \listparindent
+                        \itemindent    \z@ % remove initial par indent, with Flynn 2.8
                         \rightmargin   \leftmargin
                         \parsep        \z@ \@plus\p@}%
                 \item\relax}
