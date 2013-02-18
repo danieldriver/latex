@@ -7,13 +7,13 @@
 %% distribution base (found here: /usr/local/texlive/2012/texmf-dist/tex/latex/base/).
 %% They are distributed and modified under the LaTeX Project Public License, version 1.3c.
 %% The latest version of this license is at <www.latex-project.org/lppl.txt>.
-%% 
+%%
 %% Comments (inline and in git commits) refer to the following sources by abbreviation:
 %% 	 - clsguide: "LATEX2𝜀 for class and package writers," 15 February 2006. From the terminal type `texdoc clsguide` to pull it up.
 %% 	 - Companion: Frank Mittelbach et al. *The LaTeX Companion.* 2nd edition. Boston: Addison-Wesley, 2004.
 %%   - Flynn: Peter Flynn, "Rolling your own Document Class," TUGboat 28/1 (2007): 110--123. <www.tug.org/TUGboat/tb28-1/tb88flynn.pdf>
 %% 	 - Guide: Helmut Kopka and Patrick W. Daly. *Guide to LaTeX.* 4th edition. Boston: Addison-Wesley, 2004.
-%% 
+%%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{drd-article}
               [2012/02/18 v0.1a
@@ -22,7 +22,6 @@
 \newif\if@restonecol
 \newif\if@titlepage
 \@titlepagefalse
-\if@compatibility\else
 \DeclareOption{a4paper}
    {\setlength\paperheight {297mm}%
     \setlength\paperwidth  {210mm}}
@@ -45,29 +44,16 @@
    {\setlength\@tempdima   {\paperheight}%
     \setlength\paperheight {\paperwidth}%
     \setlength\paperwidth  {\@tempdima}}
-\fi
-\if@compatibility
-  \renewcommand\@ptsize{0}
-\else
 \DeclareOption{10pt}{\renewcommand\@ptsize{0}}
-\fi
 \DeclareOption{11pt}{\renewcommand\@ptsize{1}}
 \DeclareOption{12pt}{\renewcommand\@ptsize{2}}
-\if@compatibility\else
 \DeclareOption{oneside}{\@twosidefalse \@mparswitchfalse}
-\fi
 \DeclareOption{twoside}{\@twosidetrue  \@mparswitchtrue}
 \DeclareOption{draft}{\setlength\overfullrule{5pt}}
-\if@compatibility\else
 \DeclareOption{final}{\setlength\overfullrule{0pt}}
-\fi
 \DeclareOption{titlepage}{\@titlepagetrue}
-\if@compatibility\else
 \DeclareOption{notitlepage}{\@titlepagefalse}
-\fi
-\if@compatibility\else
 \DeclareOption{onecolumn}{\@twocolumnfalse}
-\fi
 \DeclareOption{twocolumn}{\@twocolumntrue}
 \DeclareOption{leqno}{\input{leqno.clo}}
 \DeclareOption{fleqn}{\input{fleqn.clo}}
@@ -134,45 +120,30 @@
 \setlength\headsep   {25\p@}
 \setlength\topskip   {10\p@}
 \setlength\footskip{30\p@}
-\if@compatibility \setlength\maxdepth{4\p@} \else
-\setlength\maxdepth{.5\topskip} \fi
-\if@compatibility
-  \if@twocolumn
-    \setlength\textwidth{410\p@}
+\setlength\maxdepth{.5\topskip}
+\setlength\@tempdima{\paperwidth}
+\addtolength\@tempdima{-2in}
+\setlength\@tempdimb{345\p@}
+\if@twocolumn
+  \ifdim\@tempdima>2\@tempdimb\relax
+	\setlength\textwidth{2\@tempdimb}
   \else
-    \setlength\textwidth{345\p@}
+	\setlength\textwidth{\@tempdima}
   \fi
 \else
-  \setlength\@tempdima{\paperwidth}
-  \addtolength\@tempdima{-2in}
-  \setlength\@tempdimb{345\p@}
-  \if@twocolumn
-    \ifdim\@tempdima>2\@tempdimb\relax
-      \setlength\textwidth{2\@tempdimb}
-    \else
-      \setlength\textwidth{\@tempdima}
-    \fi
+  \ifdim\@tempdima>\@tempdimb\relax
+	\setlength\textwidth{\@tempdimb}
   \else
-    \ifdim\@tempdima>\@tempdimb\relax
-      \setlength\textwidth{\@tempdimb}
-    \else
-      \setlength\textwidth{\@tempdima}
-    \fi
+	\setlength\textwidth{\@tempdima}
   \fi
 \fi
-\if@compatibility\else
-  \@settopoint\textwidth
-\fi
-\if@compatibility
-  \setlength\textheight{43\baselineskip}
-\else
-  \setlength\@tempdima{\paperheight}
-  \addtolength\@tempdima{-2in}
-  \addtolength\@tempdima{-1.5in}
-  \divide\@tempdima\baselineskip
-  \@tempcnta=\@tempdima
-  \setlength\textheight{\@tempcnta\baselineskip}
-\fi
+\@settopoint\textwidth
+\setlength\@tempdima{\paperheight}
+\addtolength\@tempdima{-2in}
+\addtolength\@tempdima{-1.5in}
+\divide\@tempdima\baselineskip
+\@tempcnta=\@tempdima
+\setlength\textheight{\@tempcnta\baselineskip}
 \addtolength\textheight{\topskip}
 \if@twocolumn
  \setlength\marginparsep {10\p@}
@@ -180,63 +151,42 @@
   \setlength\marginparsep{11\p@}
 \fi
 \setlength\marginparpush{5\p@}
-\if@compatibility
-  \if@twoside
-     \setlength\oddsidemargin   {44\p@}
-     \setlength\evensidemargin  {82\p@}
-     \setlength\marginparwidth {107\p@}
-  \else
-     \setlength\oddsidemargin   {63\p@}
-     \setlength\evensidemargin  {63\p@}
-     \setlength\marginparwidth  {90\p@}
-  \fi
-  \if@twocolumn
-     \setlength\oddsidemargin  {30\p@}
-     \setlength\evensidemargin {30\p@}
-     \setlength\marginparwidth {48\p@}
-  \fi
+\if@twoside
+  \setlength\@tempdima        {\paperwidth}
+  \addtolength\@tempdima      {-\textwidth}
+  \setlength\oddsidemargin    {.4\@tempdima}
+  \addtolength\oddsidemargin  {-1in}
+  \setlength\marginparwidth   {.6\@tempdima}
+  \addtolength\marginparwidth {-\marginparsep}
+  \addtolength\marginparwidth {-0.4in}
 \else
-  \if@twoside
-    \setlength\@tempdima        {\paperwidth}
-    \addtolength\@tempdima      {-\textwidth}
-    \setlength\oddsidemargin    {.4\@tempdima}
-    \addtolength\oddsidemargin  {-1in}
-    \setlength\marginparwidth   {.6\@tempdima}
-    \addtolength\marginparwidth {-\marginparsep}
-    \addtolength\marginparwidth {-0.4in}
-  \else
-    \setlength\@tempdima        {\paperwidth}
-    \addtolength\@tempdima      {-\textwidth}
-    \setlength\oddsidemargin    {.5\@tempdima}
-    \addtolength\oddsidemargin  {-1in}
-    \setlength\marginparwidth   {.5\@tempdima}
-    \addtolength\marginparwidth {-\marginparsep}
-    \addtolength\marginparwidth {-0.4in}
-    \addtolength\marginparwidth {-.4in}
-  \fi
-  \ifdim \marginparwidth >2in
-     \setlength\marginparwidth{2in}
-  \fi
-  \@settopoint\oddsidemargin
-  \@settopoint\marginparwidth
-  \setlength\evensidemargin  {\paperwidth}
-  \addtolength\evensidemargin{-2in}
-  \addtolength\evensidemargin{-\textwidth}
-  \addtolength\evensidemargin{-\oddsidemargin}
-  \@settopoint\evensidemargin
+  \setlength\@tempdima        {\paperwidth}
+  \addtolength\@tempdima      {-\textwidth}
+  \setlength\oddsidemargin    {.5\@tempdima}
+  \addtolength\oddsidemargin  {-1in}
+  \setlength\marginparwidth   {.5\@tempdima}
+  \addtolength\marginparwidth {-\marginparsep}
+  \addtolength\marginparwidth {-0.4in}
+  \addtolength\marginparwidth {-.4in}
 \fi
-\if@compatibility
-  \setlength\topmargin{27pt}
-\else
-  \setlength\topmargin{\paperheight}
-  \addtolength\topmargin{-2in}
-  \addtolength\topmargin{-\headheight}
-  \addtolength\topmargin{-\headsep}
-  \addtolength\topmargin{-\textheight}
-  \addtolength\topmargin{-\footskip}     % this might be wrong!
-  \addtolength\topmargin{-.5\topmargin}
-  \@settopoint\topmargin
+\ifdim \marginparwidth >2in
+   \setlength\marginparwidth{2in}
 \fi
+\@settopoint\oddsidemargin
+\@settopoint\marginparwidth
+\setlength\evensidemargin  {\paperwidth}
+\addtolength\evensidemargin{-2in}
+\addtolength\evensidemargin{-\textwidth}
+\addtolength\evensidemargin{-\oddsidemargin}
+\@settopoint\evensidemargin
+\setlength\topmargin{\paperheight}
+\addtolength\topmargin{-2in}
+\addtolength\topmargin{-\headheight}
+\addtolength\topmargin{-\headsep}
+\addtolength\topmargin{-\textheight}
+\addtolength\topmargin{-\footskip}     % this might be wrong!
+\addtolength\topmargin{-.5\topmargin}
+\@settopoint\topmargin
 \setlength\footnotesep{6.65\p@}
 \setlength{\skip\footins}{9\p@ \@plus 4\p@ \@minus 2\p@}
 \setlength\floatsep    {12\p@ \@plus 2\p@ \@minus 2\p@}
@@ -575,36 +525,21 @@
                {\list{}{\rightmargin\leftmargin}%
                 \item\relax}
                {\endlist}
-\if@compatibility
 \newenvironment{titlepage}
-    {%
-      \if@twocolumn
-        \@restonecoltrue\onecolumn
-      \else
-        \@restonecolfalse\newpage
-      \fi
-      \thispagestyle{empty}%
-      \setcounter{page}\z@
-    }%
-    {\if@restonecol\twocolumn \else \newpage \fi
-    }
-\else
-\newenvironment{titlepage}
-    {%
-      \if@twocolumn
-        \@restonecoltrue\onecolumn
-      \else
-        \@restonecolfalse\newpage
-      \fi
-      \thispagestyle{empty}%
-      \setcounter{page}\@ne
-    }%
-    {\if@restonecol\twocolumn \else \newpage \fi
-     \if@twoside\else
-        \setcounter{page}\@ne
-     \fi
-    }
-\fi
+  {%
+	\if@twocolumn
+	  \@restonecoltrue\onecolumn
+	\else
+	  \@restonecolfalse\newpage
+	\fi
+	\thispagestyle{empty}%
+	\setcounter{page}\@ne
+  }%
+  {\if@restonecol\twocolumn \else \newpage \fi
+   \if@twoside\else
+	  \setcounter{page}\@ne
+   \fi
+  }
 \newcommand\appendix{\par
   \setcounter{section}{0}%
   \setcounter{subsection}{0}%
@@ -686,10 +621,6 @@
       {\leavevmode
        \large \bfseries #1\hfil \hb@xt@\@pnumwidth{\hss #2}}\par
        \nobreak
-       \if@compatibility
-         \global\@nobreaktrue
-         \everypar{\global\@nobreakfalse\everypar{}}%
-      \fi
     \endgroup
   \fi}
 \newcommand*\l@section[2]{%
