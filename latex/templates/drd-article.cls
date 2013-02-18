@@ -1,60 +1,23 @@
 %%
-%% This is file `article.cls',
-%% generated with the docstrip utility.
+%% This is the file `drd-article.cls', a class customized by Daniel R. Driver.
+%% It builds on the standard article class and aims to provide stricter typographic
+%% control. It is for personal use, and presupposes the presence of proprietary fonts.  
 %%
-%% The original source files were:
-%%
-%% classes.dtx  (with options: `article')
+%% The source files, `article.cls' and `size10.clo', were drawn from the 2012 LaTeX
+%% distribution base (found here: /usr/local/texlive/2012/texmf-dist/tex/latex/base/).
+%% They are distributed and modified under the LaTeX Project Public License, version 1.3c.
+%% The latest version of this license is at <www.latex-project.org/lppl.txt>.
 %% 
-%% This is a generated file.
+%% Comments (inline and in git commits) refer to the following sources by abbreviation:
+%% 	 - clsguide: "LATEX2𝜀 for class and package writers," 15 February 2006. From the terminal type `texdoc clsguide` to pull it up.
+%% 	 - Companion: Frank Mittelbach et al. *The LaTeX Companion.* 2nd edition. Boston: Addison-Wesley, 2004.
+%%   - Flynn: Peter Flynn, "Rolling your own Document Class," TUGboat 28/1 (2007): 110--123. <www.tug.org/TUGboat/tb28-1/tb88flynn.pdf>
+%% 	 - Guide: Helmut Kopka and Patrick W. Daly. *Guide to LaTeX.* 4th edition. Boston: Addison-Wesley, 2004.
 %% 
-%% Copyright 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009
-%% The LaTeX3 Project and any individual authors listed elsewhere
-%% in this file.
-%% 
-%% This file was generated from file(s) of the LaTeX base system.
-%% --------------------------------------------------------------
-%% 
-%% It may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3c
-%% of this license or (at your option) any later version.
-%% The latest version of this license is in
-%%    http://www.latex-project.org/lppl.txt
-%% and version 1.3c or later is part of all distributions of LaTeX
-%% version 2005/12/01 or later.
-%% 
-%% This file has the LPPL maintenance status "maintained".
-%% 
-%% This file may only be distributed together with a copy of the LaTeX
-%% base system. You may however distribute the LaTeX base system without
-%% such generated files.
-%% 
-%% The list of all files belonging to the LaTeX base distribution is
-%% given in the file `manifest.txt'. See also `legal.txt' for additional
-%% information.
-%% 
-%% The list of derived (unpacked) files belonging to the distribution
-%% and covered by LPPL is defined by the unpacking scripts (with
-%% extension .ins) which are part of the distribution.
-%% \CharacterTable
-%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
-%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
-%%   Digits        \0\1\2\3\4\5\6\7\8\9
-%%   Exclamation   \!     Double quote  \"     Hash (number) \#
-%%   Dollar        \$     Percent       \%     Ampersand     \&
-%%   Acute accent  \'     Left paren    \(     Right paren   \)
-%%   Asterisk      \*     Plus          \+     Comma         \,
-%%   Minus         \-     Point         \.     Solidus       \/
-%%   Colon         \:     Semicolon     \;     Less than     \<
-%%   Equals        \=     Greater than  \>     Question mark \?
-%%   Commercial at \@     Left bracket  \[     Backslash     \\
-%%   Right bracket \]     Circumflex    \^     Underscore    \_
-%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
-%%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{article}
-              [2007/10/19 v1.4h
- Standard LaTeX document class]
+\ProvidesClass{drd-article}
+              [2012/02/18 v0.1a
+               DRD's custom LaTeX document class]
 \newcommand\@ptsize{}
 \newif\if@restonecol
 \newif\if@titlepage
@@ -843,4 +806,4 @@
 \fi
 \endinput
 %%
-%% End of file `article.cls'.
+%% End of file `drd-article.cls'.
