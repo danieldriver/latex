@@ -18,12 +18,14 @@
 \ProvidesClass{drd-article}
               [2012/02/18 v0.1a
                DRD's custom LaTeX document class]
-% Default values (Flynn 2.2)
+%
+%% Default values (Flynn 2.2) %%
 \newcommand\@ptsize{}
 \newif\if@restonecol
 \newif\if@titlepage
 \@titlepagefalse
-% Paper size options (Flynn 2.3.1)
+%
+%% Paper size options (Flynn 2.3.1) %%
 \DeclareOption{a4paper}
    {\setlength\paperheight {297mm}%
     \setlength\paperwidth  {210mm}}
@@ -49,7 +51,8 @@
    {\setlength\@tempdima   {\paperheight}%
     \setlength\paperheight {\paperwidth}%
     \setlength\paperwidth  {\@tempdima}}
-% Type size and layout options (Flynn 2.3.2)
+%
+%% Type size and layout options (Flynn 2.3.2) %%
 \DeclareOption{10pt}{\renewcommand\@ptsize{0}}
 \DeclareOption{11pt}{\renewcommand\@ptsize{1}}
 \DeclareOption{12pt}{\renewcommand\@ptsize{2}}
@@ -73,15 +76,35 @@
       }%
    \renewcommand\newblock{\par}}%
 }
-% Custom options (Flynn 2.3.3)
-% Apply options (Flynn 2.3.4)
+%
+%% Custom options (Flynn 2.3.3) %%
+%
+%% Apply options (Flynn 2.3.4) %%
 \ExecuteOptions{letterpaper,10pt,oneside,onecolumn,final}
 \ProcessOptions
 %
+%% Type size (Flynn 2.4.1.1) %%
+%
+% Encode type size and leading (cf. tex.stackexchange.com/questions/24599)
+% because the control sequences (e.g. \@xiipt) can get modified somewhere.
+%
+% Command         Pts    Lead    Ratio
+% -------------   ----   -----   ------
+% \tiny           6      9       1.5
+% \scriptsize     7      10      1.4286
+% \footnotesize   8      11      1.375
+% \small          9      12      1.3333
+% \normalsize     10     13      1.3
+% \large          12     15      1.25
+% \Large          14     16      1.1429
+% \LARGE          18     20      1.1111
+% \huge           24     26      1.0833
+% \Huge           36     38      1.0556
+% \HUGE           60     62      1.0333
+%
 % Begin input based on standard LaTeX distribution of `size10.clo'
-% Type size (Flynn 2.4.1.1)
 \renewcommand\normalsize{%
-   \@setfontsize\normalsize\@xpt\@xiipt
+   \@setfontsize\normalsize{10}{13}
    \abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@
    \abovedisplayshortskip \z@ \@plus3\p@
    \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
@@ -89,7 +112,7 @@
    \let\@listi\@listI}
 \normalsize
 \newcommand\small{%
-   \@setfontsize\small\@ixpt{11}%
+   \@setfontsize\small{9}{12}%
    \abovedisplayskip 8.5\p@ \@plus3\p@ \@minus4\p@
    \abovedisplayshortskip \z@ \@plus2\p@
    \belowdisplayshortskip 4\p@ \@plus2\p@ \@minus2\p@
@@ -100,7 +123,7 @@
    \belowdisplayskip \abovedisplayskip
 }
 \newcommand\footnotesize{%
-   \@setfontsize\footnotesize\@viiipt{9.5}%
+   \@setfontsize\footnotesize{8}{11}%
    \abovedisplayskip 6\p@ \@plus2\p@ \@minus4\p@
    \abovedisplayshortskip \z@ \@plus\p@
    \belowdisplayshortskip 3\p@ \@plus\p@ \@minus2\p@
@@ -110,19 +133,21 @@
                \itemsep \parsep}%
    \belowdisplayskip \abovedisplayskip
 }
-\newcommand\scriptsize{\@setfontsize\scriptsize\@viipt\@viiipt}
-\newcommand\tiny{\@setfontsize\tiny\@vpt\@vipt}
-\newcommand\large{\@setfontsize\large\@xiipt{14}}
-\newcommand\Large{\@setfontsize\Large\@xivpt{18}}
-\newcommand\LARGE{\@setfontsize\LARGE\@xviipt{22}}
-\newcommand\huge{\@setfontsize\huge\@xxpt{25}}
-\newcommand\Huge{\@setfontsize\Huge\@xxvpt{30}}
+\newcommand\scriptsize{\@setfontsize\scriptsize{7}{10}}
+\newcommand\tiny{\@setfontsize\tiny{6}{9}}
+\newcommand\large{\@setfontsize\large{12}{15}}
+\newcommand\Large{\@setfontsize\Large{14}{16}}
+\newcommand\LARGE{\@setfontsize\LARGE{18}{20}}
+\newcommand\huge{\@setfontsize\huge{24}{26}}
+\newcommand\Huge{\@setfontsize\Huge{36}{38}}
+\newcommand\HUGE{\@setfontsize\HUGE{60}{62}}
 \if@twocolumn
   \setlength\parindent{1em}
 \else
-  \setlength\parindent{15\p@}
+  \setlength\parindent{13\p@}
 \fi
-% Spacing (Flynn 2.4.1.2)
+%
+%% Spacing (Flynn 2.4.1.2) %%
 \setlength\smallskipamount{3\p@ \@plus 1\p@ \@minus 1\p@}
 \setlength\medskipamount{6\p@ \@plus 2\p@ \@minus 2\p@}
 \setlength\bigskipamount{12\p@ \@plus 4\p@ \@minus 4\p@}
@@ -131,7 +156,8 @@
 \setlength\topskip   {10\p@}
 \setlength\footskip{30\p@}
 \setlength\maxdepth{.5\topskip}
-% Text area (Flynn 2.4.1.3)
+%
+%% Text area (Flynn 2.4.1.3) %%
 \setlength\@tempdima{\paperwidth}
 \addtolength\@tempdima{-2in}
 \setlength\@tempdimb{345\p@}
@@ -156,7 +182,8 @@
 \@tempcnta=\@tempdima
 \setlength\textheight{\@tempcnta\baselineskip}
 \addtolength\textheight{\topskip}
-% Page margins (Flynn 2.4.1.4)
+%
+%% Page margins (Flynn 2.4.1.4) %%
 \if@twocolumn
  \setlength\marginparsep {10\p@}
 \else
@@ -199,7 +226,8 @@
 \addtolength\topmargin{-\footskip}     % this might be wrong!
 \addtolength\topmargin{-.5\topmargin}
 \@settopoint\topmargin
-% Footnote space (Flynn 2.4.1.5)
+%
+%% Footnote space (Flynn 2.4.1.5) %%
 \setlength\footnotesep{6.65\p@}
 \setlength{\skip\footins}{9\p@ \@plus 4\p@ \@minus 2\p@}
 \setlength\floatsep    {12\p@ \@plus 2\p@ \@minus 2\p@}
@@ -214,7 +242,8 @@
 \setlength\@dblfpsep{8\p@ \@plus 2fil}
 \setlength\@dblfpbot{0\p@ \@plus 1fil}
 \setlength\partopsep{2\p@ \@plus 1\p@ \@minus 1\p@}
-% Lists (Flynn 2.4.1.6)
+%
+%% Lists (Flynn 2.4.1.6) %%
 \def\@listi{\leftmargin\leftmargini
             \parsep 4\p@ \@plus2\p@ \@minus\p@
             \topsep 8\p@ \@plus2\p@ \@minus4\p@
@@ -245,7 +274,7 @@
               \advance\labelwidth-\labelsep}
 % End input based on standard LaTeX distribution of `size10.clo'
 %
-% Paragraph spacing and penalties (Flynn 2.4.1, 2.4.2)
+%% Paragraph spacing and penalties (Flynn 2.4.1, 2.4.2) %%
 \setlength\lineskip{1\p@}
 \setlength\normallineskip{1\p@}
 \renewcommand\baselinestretch{}
@@ -263,7 +292,8 @@
 \setcounter{dbltopnumber}{2}
 \renewcommand\dbltopfraction{.7}
 \renewcommand\dblfloatpagefraction{.5}
-% Running heads (Flynn 2.4.3)
+%
+%% Running heads (Flynn 2.4.3) %%
 \if@twoside
   \def\ps@headings{%
       \let\@oddfoot\@empty\let\@evenfoot\@empty
@@ -302,7 +332,8 @@
     \let\sectionmark\@gobble
     \let\subsectionmark\@gobble
     }
-% Titling (Flynn 2.4.4)
+%
+%% Titling (Flynn 2.4.4) %%
   \if@titlepage
   \newcommand\maketitle{\begin{titlepage}%
   \let\footnotesize\small
@@ -389,7 +420,8 @@
   \par
   \vskip 1.5em}
 \fi
-% Structure (Flynn 2.5)
+%
+%% Structure (Flynn 2.5) %%
 \setcounter{secnumdepth}{3}
 \newcounter {part}
 \newcounter {section}
@@ -457,7 +489,8 @@
                                        {3.25ex \@plus1ex \@minus .2ex}%
                                        {-1em}%
                                       {\normalfont\normalsize\bfseries}}
-% Indents and margins (Flynn 2.6)
+%
+%% Indents and margins (Flynn 2.6) %%
 \if@twocolumn
   \setlength\leftmargini  {2em}
 \else
@@ -501,7 +534,8 @@
                {\endlist}
 \newcommand*\descriptionlabel[1]{\hspace\labelsep
                                 \normalfont\bfseries #1}
-% Abstract (Flynn 2.7)
+%
+%% Abstract (Flynn 2.7) %%
 \if@titlepage
   \newenvironment{abstract}{%
       \titlepage
@@ -525,7 +559,8 @@
       \fi}
       {\if@twocolumn\else\endquotation\fi}
 \fi
-% Structural elements (Flynn 2.8)
+%
+%% Structural elements (Flynn 2.8) %%
 \newenvironment{verse}
                {\let\\\@centercr
                 \list{}{\itemsep      \z@
@@ -565,7 +600,8 @@
   \setcounter{section}{0}%
   \setcounter{subsection}{0}%
   \gdef\thesection{\@Alph\c@section}}
-% Figures and tables (Flynn 2.9)
+%
+%% Figures and tables (Flynn 2.9) %%
 \setlength\arraycolsep{5\p@}
 \setlength\tabcolsep{6\p@}
 \setlength\arrayrulewidth{.4\p@}
@@ -613,7 +649,8 @@
     \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
   \fi
   \vskip\belowcaptionskip}
-% Legacy support (Flynn 2.10)
+%
+%% Legacy support (Flynn 2.10) %%
 \DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
 \DeclareOldFontCommand{\sf}{\normalfont\sffamily}{\mathsf}
 \DeclareOldFontCommand{\tt}{\normalfont\ttfamily}{\mathtt}
@@ -623,7 +660,8 @@
 \DeclareOldFontCommand{\sc}{\normalfont\scshape}{\@nomath\sc}
 \DeclareRobustCommand*\cal{\@fontswitch\relax\mathcal}
 \DeclareRobustCommand*\mit{\@fontswitch\relax\mathnormal}
-% Table of contents (Flynn 2.11)
+%
+%% Table of contents (Flynn 2.11) %%
 \newcommand\@pnumwidth{1.55em}
 \newcommand\@tocrmarg{2.55em}
 \newcommand\@dotsep{4.5}
@@ -680,7 +718,8 @@
     \@starttoc{lot}%
     }
 \let\l@table\l@figure
-% Bibliography and indent (Flynn 2.12)
+%
+%% Bibliography and indent (Flynn 2.12) %%
 \newdimen\bibindent
 \setlength\bibindent{1.5em}
 \newenvironment{thebibliography}[1]
@@ -723,7 +762,8 @@
 \newcommand\subitem{\@idxitem \hspace*{20\p@}}
 \newcommand\subsubitem{\@idxitem \hspace*{30\p@}}
 \newcommand\indexspace{\par \vskip 10\p@ \@plus5\p@ \@minus3\p@\relax}
-% Footnote rule, section name, date format, etc. (Flynn 2.13)
+%
+%% Footnote rule, section name, date format, etc. (Flynn 2.13) %%
 \renewcommand\footnoterule{%
   \kern-3\p@
   \hrule\@width.4\columnwidth
