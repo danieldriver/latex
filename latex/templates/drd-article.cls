@@ -205,7 +205,7 @@
 \setlength\bigskipamount{12\p@ \@plus 4\p@ \@minus 4\p@}
 \setlength\headheight{12\p@}
 \setlength\headsep   {25\p@}
-\setlength\topskip   {\@ptsize\p@}
+\setlength\topskip   {1\@ptsize\p@}
 \setlength\footskip{30\p@}
 \setlength\maxdepth{.5\topskip}
 %
