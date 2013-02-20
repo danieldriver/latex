@@ -1,23 +1,23 @@
 %%
-%% This is the file `drd-article.cls', a class customized by Daniel R. Driver.
-%% It builds on the standard article class and aims to provide stricter typographic
-%% control. It is for personal use, and presupposes the presence of proprietary fonts.  
+%% This is the file `drd-article.cls', a LaTeX document class by Daniel R. Driver.
+%% It builds on the standard article class but aims to provide better typographic
+%% defaults. It is for personal use, and presupposes the presence of proprietary fonts.  
 %%
-%% The source files, `article.cls' and `size10.clo', were drawn from the 2012 LaTeX
-%% distribution base (found here: /usr/local/texlive/2012/texmf-dist/tex/latex/base/).
-%% They are distributed and modified under the LaTeX Project Public License, version 1.3c.
-%% The latest version of this license is at <www.latex-project.org/lppl.txt>.
+%% The source file `article.cls' was drawn from the 20120 LaTeX distribution base, here:
+%%   /usr/local/texlive/2012/texmf-dist/tex/latex/base/
+%% This is redistributed and modified under the LaTeX Project Public License, v1.3c:
+%%   www.latex-project.org/lppl.txt
 %%
 %% Comments (inline and in git commits) refer to the following sources by abbreviation:
 %% 	 - clsguide: "LATEX2𝜀 for class and package writers," 15 February 2006. From the terminal type `texdoc clsguide` to pull it up.
-%% 	 - Companion: Frank Mittelbach et al. *The LaTeX Companion.* 2nd edition. Boston: Addison-Wesley, 2004.
+%% 	 - Companion2: Frank Mittelbach et al. *The LaTeX Companion.* 2nd edition. Boston: Addison-Wesley, 2004.
 %%   - Flynn: Peter Flynn, "Rolling your own Document Class," TUGboat 28/1 (2007): 110--123. <www.tug.org/TUGboat/tb28-1/tb88flynn.pdf>
-%% 	 - Guide: Helmut Kopka and Patrick W. Daly. *Guide to LaTeX.* 4th edition. Boston: Addison-Wesley, 2004.
+%% 	 - Guide4: Helmut Kopka and Patrick W. Daly. *Guide to LaTeX.* 4th edition. Boston: Addison-Wesley, 2004.
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{drd-article}
               [2012/02/18 v0.1a
-               DRD's custom LaTeX document class]
+               DRD's custom LaTeX article class]
 %
 %% Default values (Flynn 2.2) %%
 \newcommand\@ptsize{}
@@ -25,7 +25,7 @@
 \newif\if@titlepage
 \@titlepagefalse
 %
-%% Paper size options (Flynn 2.3.1) %%
+% Paper size options
 \DeclareOption{a4paper}
    {\setlength\paperheight {297mm}%
     \setlength\paperwidth  {210mm}}
@@ -52,7 +52,7 @@
     \setlength\paperheight {\paperwidth}%
     \setlength\paperwidth  {\@tempdima}}
 %
-%% Type size and layout options (Flynn 2.3.2) %%
+% Type size and layout options
 \DeclareOption{10pt}{\renewcommand\@ptsize{0}}
 \DeclareOption{11pt}{\renewcommand\@ptsize{1}}
 \DeclareOption{12pt}{\renewcommand\@ptsize{2}}
@@ -85,62 +85,85 @@
 %
 %% Type size (Flynn 2.4.1.1) %%
 %
-% Encode type size and leading (cf. tex.stackexchange.com/questions/24599)
-% because the control sequences (e.g. \@xiipt) can get modified somewhere.
+  \newcommand{\tiny}{\fontsize{6}{9}\selectfont}
+  \newcommand{\scriptsize}{\fontsize{7}{10}\selectfont}
+  \newcommand{\footnotesize}{\fontsize{8}{11}\selectfont}
+  \newcommand{\small}{\fontsize{9}{12}\selectfont}
+\renewcommand{\normalsize}{\fontsize{10}{13}\selectfont}% required of any .cls file
+  \newcommand{\large}{\fontsize{12}{15}\selectfont}
+  \newcommand{\Large}{\fontsize{14}{16}\selectfont}
+  \newcommand{\LARGE}{\fontsize{16}{20}\selectfont}
+  \newcommand{\huge}{\fontsize{18}{20}\selectfont}
+  \newcommand{\Huge}{\fontsize{21}{23}\selectfont}
+  \newcommand{\HUGE}{\fontsize{24}{26}\selectfont}
+% TK - set up a switch for the following as well:
+%% 11pt base option
+%  \newcommand{\tiny}{\fontsize{7}{10}\selectfont}
+%  \newcommand{\scriptsize}{\fontsize{8}{11}\selectfont}
+%  \newcommand{\footnotesize}{\fontsize{9}{12}\selectfont}
+%  \newcommand{\small}{\fontsize{10}{13}\selectfont}
+%\renewcommand{\normalsize}{\fontsize{11}{14}\selectfont}% required
+%  \newcommand{\large}{\fontsize{14}{16}\selectfont}
+%  \newcommand{\Large}{\fontsize{16}{18}\selectfont}
+%  \newcommand{\LARGE}{\fontsize{18}{20}\selectfont}
+%  \newcommand{\huge}{\fontsize{21}{23}\selectfont}
+%  \newcommand{\Huge}{\fontsize{24}{26}\selectfont}
+%  \newcommand{\HUGE}{\fontsize{30}{32}\selectfont}
+%% 12pt base option
+%  \newcommand{\tiny}{\fontsize{8}{11}\selectfont}
+%  \newcommand{\scriptsize}{\fontsize{9}{12}\selectfont}
+%  \newcommand{\footnotesize}{\fontsize{10}{13}\selectfont}
+%  \newcommand{\small}{\fontsize{11}{14}\selectfont}
+%\renewcommand{\normalsize}{\fontsize{12}{15}\selectfont}% required
+%  \newcommand{\large}{\fontsize{16}{18}\selectfont}
+%  \newcommand{\Large}{\fontsize{18}{20}\selectfont}
+%  \newcommand{\LARGE}{\fontsize{21}{23}\selectfont}
+%  \newcommand{\huge}{\fontsize{24}{26}\selectfont}
+%  \newcommand{\Huge}{\fontsize{30}{32}\selectfont}
+%  \newcommand{\HUGE}{\fontsize{36}{38}\selectfont}
 %
-% Command         Pts    Lead    Ratio
-% -------------   ----   -----   ------
-% \tiny           6      9       1.5
-% \scriptsize     7      10      1.4286
-% \footnotesize   8      11      1.375
-% \small          9      12      1.3333
-% \normalsize     10     13      1.3
-% \large          12     15      1.25
-% \Large          14     16      1.1429
-% \LARGE          18     20      1.1111
-% \huge           24     26      1.0833
-% \Huge           36     38      1.0556
-% \HUGE           60     62      1.0333
+\normalsize % required for subsequent calculations to work
+% TK - I'm gonna have to do something about \abovedisplayskip et al
 %
 % Begin input based on standard LaTeX distribution of `size10.clo'
-\renewcommand\normalsize{%
-   \@setfontsize\normalsize{10}{13}
-   \abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@
-   \abovedisplayshortskip \z@ \@plus3\p@
-   \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
-   \belowdisplayskip \abovedisplayskip
-   \let\@listi\@listI}
-\normalsize
-\newcommand\small{%
-   \@setfontsize\small{9}{12}%
-   \abovedisplayskip 8.5\p@ \@plus3\p@ \@minus4\p@
-   \abovedisplayshortskip \z@ \@plus2\p@
-   \belowdisplayshortskip 4\p@ \@plus2\p@ \@minus2\p@
-   \def\@listi{\leftmargin\leftmargini
-               \topsep 4\p@ \@plus2\p@ \@minus2\p@
-               \parsep 2\p@ \@plus\p@ \@minus\p@
-               \itemsep \parsep}%
-   \belowdisplayskip \abovedisplayskip
-}
-\newcommand\footnotesize{%
-   \@setfontsize\footnotesize{8}{11}%
-   \abovedisplayskip 6\p@ \@plus2\p@ \@minus4\p@
-   \abovedisplayshortskip \z@ \@plus\p@
-   \belowdisplayshortskip 3\p@ \@plus\p@ \@minus2\p@
-   \def\@listi{\leftmargin\leftmargini
-               \topsep 3\p@ \@plus\p@ \@minus\p@
-               \parsep 2\p@ \@plus\p@ \@minus\p@
-               \itemsep \parsep}%
-   \belowdisplayskip \abovedisplayskip
-}
-\newcommand\scriptsize{\@setfontsize\scriptsize{7}{10}}
-\newcommand\tiny{\@setfontsize\tiny{6}{9}}
-\newcommand\large{\@setfontsize\large{12}{15}}
-\newcommand\Large{\@setfontsize\Large{14}{16}}
-\newcommand\LARGE{\@setfontsize\LARGE{18}{20}}
-\newcommand\huge{\@setfontsize\huge{24}{26}}
-\newcommand\Huge{\@setfontsize\Huge{36}{38}}
-\newcommand\HUGE{\@setfontsize\HUGE{60}{62}}
+%\renewcommand\normalsize{%
+%   \@setfontsize\normalsize{10}{13}
+%   \abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@
+%   \abovedisplayshortskip \z@ \@plus3\p@
+%   \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
+%   \belowdisplayskip \abovedisplayskip
+%   \let\@listi\@listI}
+%\normalsize
+%\newcommand\small{%
+%   \@setfontsize\small{9}{12}%
+%   \abovedisplayskip 8.5\p@ \@plus3\p@ \@minus4\p@
+%   \abovedisplayshortskip \z@ \@plus2\p@
+%   \belowdisplayshortskip 4\p@ \@plus2\p@ \@minus2\p@
+%   \def\@listi{\leftmargin\leftmargini
+%               \topsep 4\p@ \@plus2\p@ \@minus2\p@
+%               \parsep 2\p@ \@plus\p@ \@minus\p@
+%               \itemsep \parsep}%
+%   \belowdisplayskip \abovedisplayskip
+%}
+%\newcommand\footnotesize{%
+%   \@setfontsize\footnotesize{8}{11}%
+%   \abovedisplayskip 6\p@ \@plus2\p@ \@minus4\p@
+%   \abovedisplayshortskip \z@ \@plus\p@
+%   \belowdisplayshortskip 3\p@ \@plus\p@ \@minus2\p@
+%   \def\@listi{\leftmargin\leftmargini
+%               \topsep 3\p@ \@plus\p@ \@minus\p@
+%               \parsep 2\p@ \@plus\p@ \@minus\p@
+%               \itemsep \parsep}%
+%   \belowdisplayskip \abovedisplayskip
+%}
+%\newcommand\scriptsize{\@setfontsize\scriptsize{7}{10}}
+%\newcommand\tiny{\@setfontsize\tiny{6}{9}}
+%\newcommand\large{\@setfontsize\large{12}{15}}
+%\newcommand\Large{\@setfontsize\Large{14}{16}}
+%\newcommand\LARGE{\@setfontsize\LARGE{18}{20}}
+%\newcommand\huge{\@setfontsize\huge{24}{26}}
+%\newcommand\Huge{\@setfontsize\Huge{36}{38}}
+%\newcommand\HUGE{\@setfontsize\HUGE{60}{62}}
 \if@twocolumn
   \setlength\parindent{1em}
 \else
@@ -148,6 +171,7 @@
 \fi
 %
 %% Spacing (Flynn 2.4.1.2) %%
+% TK - adjust these per font size selection
 \setlength\smallskipamount{3.25\p@ \@plus 1\p@ \@minus 1\p@}
 \setlength\medskipamount{6.5\p@ \@plus 2\p@ \@minus 2\p@}
 \setlength\bigskipamount{13\p@ \@plus 4\p@ \@minus 4\p@}
