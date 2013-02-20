@@ -1,12 +1,10 @@
 %%
 %% This is the file `drd-article.cls', a LaTeX document class by Daniel R. Driver.
 %% It builds on the standard article class but aims to provide better typographic
-%% defaults. It is for personal use, and presupposes the presence of proprietary fonts.  
+%% defaults. It is for personal use and presupposes the presence of proprietary fonts.  
 %%
 %% The source file `article.cls' was drawn from the 20120 LaTeX distribution base, here:
 %%   /usr/local/texlive/2012/texmf-dist/tex/latex/base/
-%% This is redistributed and modified under the LaTeX Project Public License, v1.3c:
-%%   www.latex-project.org/lppl.txt
 %%
 %% Comments (inline and in git commits) refer to the following sources by abbreviation:
 %% 	 - clsguide: "LATEX2𝜀 for class and package writers," 15 February 2006. From the terminal type `texdoc clsguide` to pull it up.
@@ -84,6 +82,16 @@
 \ProcessOptions
 %
 %% Type size (Flynn 2.4.1.1) %%
+%
+\RequirePackage{fontspec,realscripts}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont[Numbers=OldStyle]{Arno Pro}
+\setsansfont[ItalicFont={SeriaSansPro-BoldItalic}]{SeriaSansPro-Italic}
+\setsansfont{Seria Sans Pro}
+\setmonofont{Menlo}
+\newfontfamily{\sbl}{SBL Hebrew}
+\newfontfamily{\display}[Alternate=1,Style=TitlingCaps]{SilentiumPro-RomanI}
+\frenchspacing
 %
   \newcommand{\tiny}{\fontsize{6}{9}\selectfont}
   \newcommand{\scriptsize}{\fontsize{7}{10}\selectfont}
@@ -184,7 +192,8 @@
 %% Text area (Flynn 2.4.1.3) %%
 \setlength\@tempdima{\paperwidth}
 \addtolength\@tempdima{-2in}
-\setlength\@tempdimb{345\p@}
+\settowidth\@tempdimb{\normalfont abcdefghijklmnopqrstuvwxyz}
+%\setlength\@tempdimb{345\p@}
 \if@twocolumn
   \ifdim\@tempdima>2\@tempdimb\relax
 	\setlength\textwidth{2\@tempdimb}
@@ -193,7 +202,7 @@
   \fi
 \else
   \ifdim\@tempdima>\@tempdimb\relax
-	\setlength\textwidth{\@tempdimb}
+	\setlength\textwidth{2.5\@tempdimb}% about the same as 66, and simpler: tex.stackexchange.com/questions/59626
   \else
 	\setlength\textwidth{\@tempdima}
   \fi
