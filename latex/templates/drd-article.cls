@@ -1,8 +1,9 @@
 %%
-%% This is the file `drd-article.cls', a LaTeX document class by Daniel R. Driver.
-%% It builds on the standard article class but aims to provide better typographic
-%% defaults. It is for personal use and presupposes the presence of proprietary fonts.  
+%% This is the file `drd-article.cls', a LaTeX document class adapted by D.R. Driver.
+%% Some of his work is online at <www.danieldriver.com> and <www.github.com/danieldriver>.
 %%
+%% The class builds on the standard article class but aims to provide better typographic
+%% defaults. It is for personal use and presupposes the presence of proprietary fonts.  
 %% The source file `article.cls' was drawn from the 2012 LaTeX distribution base, here:
 %%   /usr/local/texlive/2012/texmf-dist/tex/latex/base/
 %%
@@ -199,20 +200,20 @@
 %
 %% Spacing (Flynn 2.4.1.2) %%
 % TK - adjust these per font size selection
-\setlength\smallskipamount{3.25\p@ \@plus 1\p@ \@minus 1\p@}
-\setlength\medskipamount{6.5\p@ \@plus 2\p@ \@minus 2\p@}
-\setlength\bigskipamount{13\p@ \@plus 4\p@ \@minus 4\p@}
-\setlength\headheight{13\p@}
-\setlength\headsep   {26\p@}
-\setlength\topskip   {10\p@}
+\setlength\smallskipamount{3\p@ \@plus 1\p@ \@minus 1\p@}
+\setlength\medskipamount{6\p@ \@plus 2\p@ \@minus 2\p@}
+\setlength\bigskipamount{12\p@ \@plus 4\p@ \@minus 4\p@}
+\setlength\headheight{12\p@}
+\setlength\headsep   {25\p@}
+\setlength\topskip   {\@ptsize\p@}
 \setlength\footskip{30\p@}
 \setlength\maxdepth{.5\topskip}
 %
 %% Text area (Flynn 2.4.1.3) %%
 \setlength\@tempdima{\paperwidth}
 \addtolength\@tempdima{-2in}
+%\setlength\@tempdimb{345\p@}% originally 360 for 11pt, 390 for 12pt
 \settowidth\@tempdimb{\normalfont abcdefghijklmnopqrstuvwxyz}
-%\setlength\@tempdimb{345\p@}
 \if@twocolumn
   \ifdim\@tempdima>2\@tempdimb\relax
 	\setlength\textwidth{2\@tempdimb}
@@ -239,9 +240,9 @@
 \if@twocolumn
  \setlength\marginparsep {10\p@}
 \else
-  \setlength\marginparsep{11\p@}
+  \setlength\marginparsep{10\p@}
 \fi
-\setlength\marginparpush{5\p@}
+\ifthenelse{\@ptsize = 2}{\setlength\marginparpush{7\p@}}{\setlength\marginparpush{5\p@}}
 \if@twoside
   \setlength\@tempdima        {\paperwidth}
   \addtolength\@tempdima      {-\textwidth}
@@ -280,38 +281,66 @@
 \@settopoint\topmargin
 %
 %% Footnote space (Flynn 2.4.1.5) %%
-\setlength\footnotesep{6.65\p@}
-\setlength{\skip\footins}{9\p@ \@plus 4\p@ \@minus 2\p@}
-\setlength\floatsep    {12\p@ \@plus 2\p@ \@minus 2\p@}
-\setlength\textfloatsep{20\p@ \@plus 2\p@ \@minus 4\p@}
-\setlength\intextsep   {12\p@ \@plus 2\p@ \@minus 2\p@}
-\setlength\dblfloatsep    {12\p@ \@plus 2\p@ \@minus 2\p@}
+\ifthenelse{\@ptsize = 0}{\setlength\footnotesep{6.65\p@}}{}
+\ifthenelse{\@ptsize = 1}{\setlength\footnotesep{7.7\p@}}{}
+\ifthenelse{\@ptsize = 2}{\setlength\footnotesep{8.4\p@}}{}
+\setlength{\skip\footins}{1\@ptsize\p@ \@plus 4\p@ \@minus 2\p@}
+\setlength\floatsep      {12\p@ \@plus 2\p@ \@minus 2\p@}
+\setlength\textfloatsep  {20\p@ \@plus 2\p@ \@minus 4\p@}
+\ifthenelse{\@ptsize = 2}
+  {\setlength\intextsep  {14\p@ \@plus 2\p@ \@minus 4\p@}}
+  {\setlength\intextsep  {12\p@ \@plus 2\p@ \@minus 2\p@}}
+\ifthenelse{\@ptsize = 2}
+  {\setlength\dblfloatsep{14\p@ \@plus 2\p@ \@minus 4\p@}}
+  {\setlength\dblfloatsep{12\p@ \@plus 2\p@ \@minus 2\p@}}
 \setlength\dbltextfloatsep{20\p@ \@plus 2\p@ \@minus 4\p@}
 \setlength\@fptop{0\p@ \@plus 1fil}
-\setlength\@fpsep{8\p@ \@plus 2fil}
-\setlength\@fpbot{0\p@ \@plus 1fil}
+\ifthenelse{\@ptsize = 2}
+  {\setlength\@fpsep{10\p@ \@plus 2fil}}
+  {\setlength\@fpsep{8\p@ \@plus 2fil}}
+   \setlength\@fpbot{0\p@ \@plus 1fil}
 \setlength\@dblfptop{0\p@ \@plus 1fil}
-\setlength\@dblfpsep{8\p@ \@plus 2fil}
+\ifthenelse{\@ptsize = 2}
+  {\setlength\@dblfpsep{10\p@ \@plus 2fil}}
+  {\setlength\@dblfpsep{8\p@ \@plus 2fil}}
 \setlength\@dblfpbot{0\p@ \@plus 1fil}
-\setlength\partopsep{2\p@ \@plus 1\p@ \@minus 1\p@}
+\setlength\partopsep{3\p@ \@plus 2\p@ \@minus 2\p@}
 %
 %% Lists (Flynn 2.4.1.6) %%
-\def\@listi{\leftmargin\leftmargini
-            \parsep 4\p@ \@plus2\p@ \@minus\p@
-            \topsep 8\p@ \@plus2\p@ \@minus4\p@
-            \itemsep4\p@ \@plus2\p@ \@minus\p@}
+\def\@listi{\leftmargin\leftmargini%
+			\ifthenelse{\@ptsize = 0}{
+			   \parsep 4\p@ \@plus2\p@ \@minus\p@
+			   \topsep 8\p@ \@plus2\p@ \@minus4\p@
+			   \itemsep4\p@ \@plus2\p@ \@minus\p@}{}
+			\ifthenelse{\@ptsize = 1}{
+			   \parsep 4.5\p@ \@plus2\p@ \@minus\p@
+			   \topsep 9\p@   \@plus3\p@ \@minus5\p@
+			   \itemsep4.5\p@ \@plus2\p@ \@minus\p@}{}
+			\ifthenelse{\@ptsize = 2}{
+			   \parsep 5\p@  \@plus2.5\p@ \@minus\p@
+			   \topsep 10\p@ \@plus4\p@   \@minus6\p@
+			   \itemsep5\p@  \@plus2.5\p@ \@minus\p@}{}
+		    }
 \let\@listI\@listi
 \@listi
-\def\@listii {\leftmargin\leftmarginii
-              \labelwidth\leftmarginii
-              \advance\labelwidth-\labelsep
-              \topsep    4\p@ \@plus2\p@ \@minus\p@
-              \parsep    2\p@ \@plus\p@  \@minus\p@
-              \itemsep   \parsep}
+\def\@listii{\leftmargin\leftmarginii
+			 \labelwidth\leftmarginii
+			 \advance\labelwidth-\labelsep
+			 \ifthenelse{\@ptsize = 2}
+				{\topsep   5\p@ \@plus2.5\p@ \@minus\p@
+				 \parsep 2.5\p@ \@plus\p@    \@minus\p@}
+				{\topsep   4\p@ \@plus2\p@   \@minus\p@
+				 \parsep   2\p@ \@plus\p@    \@minus\p@}
+			 \itemsep   \parsep
+			 }
+
+
 \def\@listiii{\leftmargin\leftmarginiii
               \labelwidth\leftmarginiii
               \advance\labelwidth-\labelsep
-              \topsep    2\p@ \@plus\p@\@minus\p@
+			  \ifthenelse{\@ptsize = 2}
+				 {\topsep 3\p@ \@plus\p@ \@minus2\p@}
+				 {\topsep 2\p@ \@plus\p@ \@minus\p@}
               \parsep    \z@
               \partopsep \p@ \@plus\z@ \@minus\p@
               \itemsep   \topsep}
