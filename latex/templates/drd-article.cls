@@ -3,10 +3,10 @@
 %% It builds on the standard article class but aims to provide better typographic
 %% defaults. It is for personal use and presupposes the presence of proprietary fonts.  
 %%
-%% The source file `article.cls' was drawn from the 20120 LaTeX distribution base, here:
+%% The source file `article.cls' was drawn from the 2012 LaTeX distribution base, here:
 %%   /usr/local/texlive/2012/texmf-dist/tex/latex/base/
 %%
-%% Comments (inline and in git commits) refer to the following sources by abbreviation:
+%% Comments refer to the following sources by abbreviation:
 %% 	 - clsguide: "LATEX2𝜀 for class and package writers," 15 February 2006. From the terminal type `texdoc clsguide` to pull it up.
 %% 	 - Companion2: Frank Mittelbach et al. *The LaTeX Companion.* 2nd edition. Boston: Addison-Wesley, 2004.
 %%   - Flynn: Peter Flynn, "Rolling your own Document Class," TUGboat 28/1 (2007): 110--123. <www.tug.org/TUGboat/tb28-1/tb88flynn.pdf>
@@ -14,15 +14,13 @@
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{drd-article}
-              [2012/02/18 v0.1a
-               DRD's custom LaTeX article class]
-%
-%% Default values (Flynn 2.2) %%
+              [2012/02/20 v0.1b
+               DRD's custom article class]
+% Default values
 \newcommand\@ptsize{}
 \newif\if@restonecol
 \newif\if@titlepage
 \@titlepagefalse
-%
 % Paper size options
 \DeclareOption{a4paper}
    {\setlength\paperheight {297mm}%
@@ -49,7 +47,6 @@
    {\setlength\@tempdima   {\paperheight}%
     \setlength\paperheight {\paperwidth}%
     \setlength\paperwidth  {\@tempdima}}
-%
 % Type size and layout options
 \DeclareOption{10pt}{\renewcommand\@ptsize{0}}
 \DeclareOption{11pt}{\renewcommand\@ptsize{1}}
@@ -74,11 +71,8 @@
       }%
    \renewcommand\newblock{\par}}%
 }
-%
-%% Custom options (Flynn 2.3.3) %%
-%
-%% Apply options (Flynn 2.3.4) %%
-\ExecuteOptions{letterpaper,10pt,oneside,onecolumn,final}
+% Apply options
+\ExecuteOptions{letterpaper,10pt,oneside,onecolumn,final}% Defaults
 \ProcessOptions
 %
 %% Type size (Flynn 2.4.1.1) %%
