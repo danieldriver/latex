@@ -93,89 +93,114 @@
 \newfontfamily{\display}[Alternate=1,Style=TitlingCaps]{SilentiumPro-RomanI}
 \frenchspacing
 %
+\RequirePackage{ifthen}% Guide4 10.3.5 (p192)
+\ifthenelse{\@ptsize = 0}{% 10pt base size
   \newcommand{\tiny}{\fontsize{6}{9}\selectfont}
   \newcommand{\scriptsize}{\fontsize{7}{10}\selectfont}
-  \newcommand{\footnotesize}{\fontsize{8}{11}\selectfont}
-  \newcommand{\small}{\fontsize{9}{12}\selectfont}
-\renewcommand{\normalsize}{\fontsize{10}{13}\selectfont}% required of any .cls file
+  \newcommand{\footnotesize}{\fontsize{8}{11}\selectfont%
+			  \abovedisplayskip 8\p@ \@plus3\p@ \@minus4\p@
+			  \abovedisplayshortskip \z@ \@plus\p@
+			  \belowdisplayshortskip 3\p@ \@plus\p@ \@minus2\p@
+			  \def\@listi{\leftmargin\leftmargini
+						  \topsep 3\p@ \@plus\p@ \@minus\p@
+						  \parsep 2\p@ \@plus\p@ \@minus\p@
+						  \itemsep \parsep}%
+			  \belowdisplayskip \abovedisplayskip}
+  \newcommand{\small}{\fontsize{9}{12}\selectfont%
+			  \abovedisplayskip 9\p@ \@plus3\p@ \@minus4\p@
+			  \abovedisplayshortskip \z@ \@plus2\p@
+			  \belowdisplayshortskip 4\p@ \@plus2\p@ \@minus2\p@
+			  \def\@listi{\leftmargin\leftmargini
+						  \topsep 4\p@ \@plus2\p@ \@minus2\p@
+						  \parsep 2\p@ \@plus\p@ \@minus\p@
+						  \itemsep \parsep}%
+			  \belowdisplayskip \abovedisplayskip}
+\renewcommand{\normalsize}{\fontsize{10}{13}\selectfont%
+			  \abovedisplayskip 10\p@ \@plus3\p@ \@minus5\p@
+			  \abovedisplayshortskip \z@ \@plus3\p@
+			  \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
+			  \belowdisplayskip \abovedisplayskip
+			  \let\@listi\@listI}
   \newcommand{\large}{\fontsize{12}{15}\selectfont}
   \newcommand{\Large}{\fontsize{14}{16}\selectfont}
   \newcommand{\LARGE}{\fontsize{16}{20}\selectfont}
   \newcommand{\huge}{\fontsize{18}{20}\selectfont}
   \newcommand{\Huge}{\fontsize{21}{23}\selectfont}
   \newcommand{\HUGE}{\fontsize{24}{26}\selectfont}
-% TK - set up a switch for the following as well:
-%% 11pt base option
-%  \newcommand{\tiny}{\fontsize{7}{10}\selectfont}
-%  \newcommand{\scriptsize}{\fontsize{8}{11}\selectfont}
-%  \newcommand{\footnotesize}{\fontsize{9}{12}\selectfont}
-%  \newcommand{\small}{\fontsize{10}{13}\selectfont}
-%\renewcommand{\normalsize}{\fontsize{11}{14}\selectfont}% required
-%  \newcommand{\large}{\fontsize{14}{16}\selectfont}
-%  \newcommand{\Large}{\fontsize{16}{18}\selectfont}
-%  \newcommand{\LARGE}{\fontsize{18}{20}\selectfont}
-%  \newcommand{\huge}{\fontsize{21}{23}\selectfont}
-%  \newcommand{\Huge}{\fontsize{24}{26}\selectfont}
-%  \newcommand{\HUGE}{\fontsize{30}{32}\selectfont}
-%% 12pt base option
-%  \newcommand{\tiny}{\fontsize{8}{11}\selectfont}
-%  \newcommand{\scriptsize}{\fontsize{9}{12}\selectfont}
-%  \newcommand{\footnotesize}{\fontsize{10}{13}\selectfont}
-%  \newcommand{\small}{\fontsize{11}{14}\selectfont}
-%\renewcommand{\normalsize}{\fontsize{12}{15}\selectfont}% required
-%  \newcommand{\large}{\fontsize{16}{18}\selectfont}
-%  \newcommand{\Large}{\fontsize{18}{20}\selectfont}
-%  \newcommand{\LARGE}{\fontsize{21}{23}\selectfont}
-%  \newcommand{\huge}{\fontsize{24}{26}\selectfont}
-%  \newcommand{\Huge}{\fontsize{30}{32}\selectfont}
-%  \newcommand{\HUGE}{\fontsize{36}{38}\selectfont}
-%
-\normalsize % required for subsequent calculations to work
-% TK - I'm gonna have to do something about \abovedisplayskip et al
-%
-% Begin input based on standard LaTeX distribution of `size10.clo'
-%\renewcommand\normalsize{%
-%   \@setfontsize\normalsize{10}{13}
-%   \abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@
-%   \abovedisplayshortskip \z@ \@plus3\p@
-%   \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
-%   \belowdisplayskip \abovedisplayskip
-%   \let\@listi\@listI}
-%\normalsize
-%\newcommand\small{%
-%   \@setfontsize\small{9}{12}%
-%   \abovedisplayskip 8.5\p@ \@plus3\p@ \@minus4\p@
-%   \abovedisplayshortskip \z@ \@plus2\p@
-%   \belowdisplayshortskip 4\p@ \@plus2\p@ \@minus2\p@
-%   \def\@listi{\leftmargin\leftmargini
-%               \topsep 4\p@ \@plus2\p@ \@minus2\p@
-%               \parsep 2\p@ \@plus\p@ \@minus\p@
-%               \itemsep \parsep}%
-%   \belowdisplayskip \abovedisplayskip
-%}
-%\newcommand\footnotesize{%
-%   \@setfontsize\footnotesize{8}{11}%
-%   \abovedisplayskip 6\p@ \@plus2\p@ \@minus4\p@
-%   \abovedisplayshortskip \z@ \@plus\p@
-%   \belowdisplayshortskip 3\p@ \@plus\p@ \@minus2\p@
-%   \def\@listi{\leftmargin\leftmargini
-%               \topsep 3\p@ \@plus\p@ \@minus\p@
-%               \parsep 2\p@ \@plus\p@ \@minus\p@
-%               \itemsep \parsep}%
-%   \belowdisplayskip \abovedisplayskip
-%}
-%\newcommand\scriptsize{\@setfontsize\scriptsize{7}{10}}
-%\newcommand\tiny{\@setfontsize\tiny{6}{9}}
-%\newcommand\large{\@setfontsize\large{12}{15}}
-%\newcommand\Large{\@setfontsize\Large{14}{16}}
-%\newcommand\LARGE{\@setfontsize\LARGE{18}{20}}
-%\newcommand\huge{\@setfontsize\huge{24}{26}}
-%\newcommand\Huge{\@setfontsize\Huge{36}{38}}
-%\newcommand\HUGE{\@setfontsize\HUGE{60}{62}}
+}{}
+\ifthenelse{\@ptsize = 1}{% 11pt base size
+  \newcommand{\tiny}{\fontsize{7}{10}\selectfont}
+  \newcommand{\scriptsize}{\fontsize{8}{11}\selectfont}
+  \newcommand{\footnotesize}{\fontsize{9}{12}\selectfont%
+			  \abovedisplayskip 9\p@ \@plus3\p@ \@minus4\p@
+			  \abovedisplayshortskip \z@ \@plus2\p@
+			  \belowdisplayshortskip 4\p@ \@plus2\p@ \@minus2\p@
+			  \def\@listi{\leftmargin\leftmargini
+						  \topsep 4\p@ \@plus2\p@ \@minus2\p@
+						  \parsep 2\p@ \@plus\p@ \@minus\p@
+						  \itemsep \parsep}%
+			  \belowdisplayskip \abovedisplayskip}
+  \newcommand{\small}{\fontsize{10}{13}\selectfont%
+			  \abovedisplayskip 10\p@ \@plus3\p@ \@minus5\p@
+			  \abovedisplayshortskip \z@ \@plus3\p@
+			  \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
+			  \def\@listi{\leftmargin\leftmargini
+						  \topsep 6\p@ \@plus2\p@ \@minus2\p@
+						  \parsep 3\p@ \@plus2\p@ \@minus\p@
+						  \itemsep \parsep}%
+			  \belowdisplayskip \abovedisplayskip}
+\renewcommand{\normalsize}{\fontsize{11}{14}\selectfont%
+			  \abovedisplayskip 11\p@ \@plus3\p@ \@minus6\p@
+			  \abovedisplayshortskip \z@ \@plus3\p@
+			  \belowdisplayshortskip 6.5\p@ \@plus3.5\p@ \@minus3\p@
+			  \belowdisplayskip \abovedisplayskip
+			  \let\@listi\@listI}
+  \newcommand{\large}{\fontsize{14}{16}\selectfont}
+  \newcommand{\Large}{\fontsize{16}{18}\selectfont}
+  \newcommand{\LARGE}{\fontsize{18}{20}\selectfont}
+  \newcommand{\huge}{\fontsize{21}{23}\selectfont}
+  \newcommand{\Huge}{\fontsize{24}{26}\selectfont}
+  \newcommand{\HUGE}{\fontsize{30}{32}\selectfont}
+}{}
+\ifthenelse{\@ptsize = 2}{% 12pt base size
+  \newcommand{\tiny}{\fontsize{8}{11}\selectfont}
+  \newcommand{\scriptsize}{\fontsize{9}{12}\selectfont}
+  \newcommand{\footnotesize}{\fontsize{10}{13}\selectfont%
+			  \abovedisplayskip 10\p@ \@plus3\p@ \@minus5\p@
+			  \abovedisplayshortskip \z@ \@plus3\p@
+			  \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
+			  \def\@listi{\leftmargin\leftmargini
+						  \topsep 6\p@ \@plus2\p@ \@minus2\p@
+						  \parsep 3\p@ \@plus2\p@ \@minus\p@
+						  \itemsep \parsep}%
+			  \belowdisplayskip \abovedisplayskip}
+  \newcommand{\small}{\fontsize{11}{14}\selectfont%
+			  \abovedisplayskip 11\p@ \@plus3\p@ \@minus6\p@
+			  \abovedisplayshortskip \z@ \@plus3\p@
+			  \belowdisplayshortskip 6.5\p@ \@plus3.5\p@ \@minus3\p@
+			  \def\@listi{\leftmargin\leftmargini
+						  \topsep 9\p@ \@plus3\p@ \@minus5\p@
+						  \parsep 4.5\p@ \@plus2\p@ \@minus\p@
+						  \itemsep \parsep}%
+			  \belowdisplayskip \abovedisplayskip}
+\renewcommand{\normalsize}{\fontsize{12}{14}\selectfont%
+			  \abovedisplayskip 12\p@ \@plus2\p@ \@minus7\p@
+			  \abovedisplayshortskip \z@ \@plus3\p@
+			  \belowdisplayshortskip 6.5\p@ \@plus3.5\p@ \@minus3\p@
+			  \belowdisplayskip \abovedisplayskip
+			  \let\@listi\@listI}
+  \newcommand{\large}{\fontsize{16}{18}\selectfont}
+  \newcommand{\Large}{\fontsize{18}{20}\selectfont}
+  \newcommand{\LARGE}{\fontsize{21}{23}\selectfont}
+  \newcommand{\huge}{\fontsize{24}{26}\selectfont}
+  \newcommand{\Huge}{\fontsize{30}{32}\selectfont}
+  \newcommand{\HUGE}{\fontsize{36}{38}\selectfont}
+}{}
+\normalsize % required for subsequent calculations
 \if@twocolumn
   \setlength\parindent{1em}
 \else
-  \setlength\parindent{13\p@}
+  \ifthenelse{\@ptsize = 0}{\setlength\parindent{13\p@}}{\setlength\parindent{14\p@}}
 \fi
 %
 %% Spacing (Flynn 2.4.1.2) %%
