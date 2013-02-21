@@ -867,7 +867,7 @@
   January\or February\or March\or April\or May\or June\or
   July\or August\or September\or October\or November\or December\fi
   \space\number\year}
-\setlength\columnsep{10\p@}
+\setlength\columnsep{1\@ptsize\p@}
 \setlength\columnseprule{0\p@}
 \pagestyle{plain}
 \pagenumbering{arabic}
