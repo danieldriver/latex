@@ -14,7 +14,7 @@
 %% 	 - Guide4: Helmut Kopka and Patrick W. Daly. *Guide to LaTeX.* 4th edition. Boston: Addison-Wesley, 2004.
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{drd-article}[2012/02/20 v0.1.2 DRD's custom article class]
+\ProvidesClass{drd-article}[2012/02/22 v0.1.3 DRD's custom article class]
 %
 % Default values
 \newcommand\@ptsize{}
