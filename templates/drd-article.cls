@@ -83,11 +83,10 @@
 \RequirePackage{fontspec,realscripts}
 \defaultfontfeatures{Ligatures=TeX}
 \setmainfont[Numbers=OldStyle]{Arno Pro}
-\setsansfont[ItalicFont={SeriaSansPro-BoldItalic}]{SeriaSansPro-Italic}
-\setsansfont{Seria Sans Pro}
-\setmonofont{Menlo}
-\newfontfamily{\sbl}{SBL Hebrew}
-\newfontfamily{\display}[Alternate=1,Style=TitlingCaps]{SilentiumPro-RomanI}
+\setsansfont{Scala Sans Pro}
+\setmonofont[Scale=MatchLowercase]{Menlo}
+\newfontfamily{\sbl}[Script=Hebrew]{SBL Hebrew}
+\AtBeginDocument{\RequirePackage{bidi}}% clsguide 4.6 (p17)
 \frenchspacing
 %
 % Type size

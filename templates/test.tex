@@ -1,0 +1,149 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt]{drd-article}
+
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage{xltxtra}% fontspec with realscripts is loaded by the class
+%\defaultfontfeatures{Mapping=tex-text}
+%\setromanfont{Garamond Premier Pro}
+%\setsansfont{Scala Sans Pro}
+%\setmonofont[]{Menlo}
+
+\title{A Document for Class Development Testing}
+\author{Daniel R. Driver\thanks{The work of two people in particular makes working in 
+\TeX{}  attractive to me: Jonathan Kew, author of \XeTeX, and Will Robertson, who has 
+kept fontspec.sty alive and well.}}
+
+\begin{document}
+\maketitle
+
+\newfontfamily{\A}{Geeza Pro}
+\newfontfamily{\H}[Scale=0.9]{Lucida Grande}
+\newfontfamily{\J}[Scale=0.85]{Osaka}
+
+This is a simple test file that provides an array of basic \LaTeX{} document commands,
+plus some things that \XeTeX and the \verb=fontspec= package should be able to handle,
+such as multilingual fonts for unicode text. Here is some Japanese: {\J 今日は}. This 
+is Arabic text: {\A السلام عليكم}. This is Hebrew: {\H שלום}. Here's how the God of Israel
+introduces the Ten Commandments:
+
+\setRL{\sbl אָנֹכִי יְהוָה אֱלֹהֶיךָ אֲשֶׁר הוֹצֵאתִיךָ מֵאֶרֶץ מִצְרַיִם מִבֵּית עֲבָדִים׃}\setLR
+
+\section{Wherein Sections are Numbered and Named}
+By default, numbers are assigned to the first three levels, but not below that. Notice the 
+hierarchy of type, which in my custom class moves from ALL CAPS to \textsc{small caps} to 
+\emph{u\&lc italic}. Bold is used more selectively.
+
+\lipsum[1]
+
+\subsection{Sections Contain Subsections}
+
+\lipsum[2]
+
+\subsubsection{Consider the lowly sub-subsections.}
+\lipsum[3]
+
+\begin{quotation}
+\lipsum[4-5]
+\end{quotation}
+
+\lipsum[6]
+
+\paragraph{Interstitial career}
+\lipsum[7]
+
+\subparagraph{Strategy}
+
+\lipsum[8]
+
+\section{Lists}
+
+\subsection{Itemize}
+
+\begin{itemize}
+  \item The first item
+  \item The second item
+  \item The third etc \ldots
+\end{itemize}
+
+\subsection{Enumerate}
+
+\begin{enumerate}
+  \item The first item
+  \begin{enumerate}
+    \item Nested item 1
+    \item Nested item 2
+  \end{enumerate}
+  \item The second item
+  \item The third etc \ldots
+\end{enumerate}
+
+\subsection{Description}
+
+\begin{description}
+  \item[First] The first item
+  \item[Second] The second item
+  \item[Third] The third etc \ldots
+\end{description}
+
+And let's not forget tabular data and math.
+
+\begin{table}
+\centering
+\caption{Average characters per line} \label{tab:copyfitting}
+\begin{tabular}{r|rrrrrrrr} \hline
+Pts. & \multicolumn{8}{c}{Line length in picas} \\
+     & 10 & 14 & 18 & 22 & 26  & 30  & 35 & 40 \\ \hline
+80   & \textit{40} & \textbf{56} & \textbf{72} & 88 & 104 &     &    &    \\
+85   & \textit{38} & \textit{53} & \textbf{68} & 83 & 98 & 113 &    &    \\
+90   & \textit{36} & \textit{50} & \textbf{64} & 79 & 86 & 107 &    &    \\
+95   & 34 & \textit{48} & \textbf{62} & 75 & 89 & 103 &    &    \\
+100  & 33 & \textit{46} & \textbf{59} & \textbf{73} & 86 & 99 & 116 &   \\
+105  & 32 & \textit{44} & 57 & \textbf{70} & 82 & 95 & 111 &   \\
+110  & 30 & \textit{43} & 55 & \textbf{67} & 79 & 92 & 107 &   \\
+115  & 29 & \textit{41} & 53 & \textbf{64} & 76 & 88 & 103 &   \\
+120  & 28 & \textit{39} & \textit{50} & \textbf{62} & 73 & 84 & 98 & 112 \\
+125  & 27 & 38 & \textit{48} & \textbf{59} & \textbf{70} & 81 & 94 & 108 \\
+130  & 26 & 36 & \textit{47} & 57 & \textbf{67} & 78 & 91 & 104 \\
+135  & 25 & 35 & \textit{45} & 55 & \textbf{65} & 75 & 88 & 100 \\
+140  & 24 & 34 & \textit{44} & 53 & \textbf{63} & 73 & 85 & 97 \\
+145  & 23 & 33 & \textit{42} & 51 & \textbf{61} & \textbf{70} & 82 & 94 \\
+150  & 23 & 32 & \textit{41} & \textit{51} & \textbf{60} & \textbf{69} & 81 & 92 \\
+155  & 22 & 31 & \textit{39} & \textit{49} & 58 & \textbf{67} & 79 & 90 \\
+160  & 22 & 30 & 39 & \textit{48} & 56 & \textbf{65} & 76 & 87 \\
+165  & 21 & 30 & 38 & \textit{46} & 55 & \textbf{63} & 74 & 84 \\
+170  & 21 & 29 & 37 & \textit{45} & 53 & \textbf{62} & 72 & 82 \\
+175  & 20 & 28 & 36 & \textit{44} & 52 & \textbf{60} & \textbf{70} & 80 \\
+180  & 20 & 27 & 35 & \textit{43} & 51 & 59 & \textbf{68} & 78 \\
+185  & 19 & 27 & 34 & \textit{42} & \textit{49} & 57 & \textbf{67} & 76 \\
+190  & 19 & 26 & 33 & 41 & \textit{48} & 56 & \textbf{65} & 74 \\
+195  & 18 & 25 & 32 & 40 & \textit{47} & 54 & \textbf{63} & 72 \\
+200  & 18 & 25 & 32 & 39 & \textit{46} & 53 & \textbf{62} & \textbf{70} \\ 
+220  & 16 & 22 & 29 & 35 & \textit{41} & \textit{48} & 56 & \textbf{64} \\
+240  & 15 & 20 & 26 & 32 & 38 & \textit{44} & 51 & 58 \\
+260  & 14 & 19 & 24 & 30 & 35 & 41 & \textit{48} & 54 \\
+280  & 13 & 18 & 23 & 28 & 33 & 38 & \textit{44} & 50 \\
+300  & 12 & 17 & 21 & 26 & 31 & 35 & 41 & \textit{47} \\
+320  & 11 & 16 & 20 & 25 & 29 & 34 & 39 & \textit{45} \\
+340  & 10 & 15 & 19 & 23 & 27 & 32 & 37 & 42 \\
+\hline
+\end{tabular}
+
+\end{table}
+
+Morten H{\o}gholm has done some curve fitting to the data. He determined that the expressions
+\begin{equation}
+L_{65} = 2.042\alpha + 33.41 \label{eq:L65}
+\end{equation}
+and
+\begin{equation}
+L_{45} = 1.415\alpha + 23.03 \label{eq:L45}
+\end{equation}
+fitted aspects of the data, where $\alpha$ is the length of the alphabet
+in points, and $L_{i}$ is the suggested width in points, for a line with
+$i$ characters.
+
+
+\end{document}
