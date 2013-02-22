@@ -15,7 +15,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{drd-article}
-              [2012/02/20 v0.1b
+              [2012/02/20 v0.1.2
                DRD's custom article class]
 % Default values
 \newcommand\@ptsize{}
@@ -76,8 +76,8 @@
 \ExecuteOptions{letterpaper,10pt,oneside,onecolumn,final}% Defaults
 \ProcessOptions
 %
-%% Type size (Flynn 2.4.1.1) %%
-%
+% Type selection
+\RequirePackage{ifthen}% Guide4 10.3.5 (p192)
 \RequirePackage{fontspec,realscripts}
 \defaultfontfeatures{Ligatures=TeX}
 \setmainfont[Numbers=OldStyle]{Arno Pro}
@@ -88,7 +88,7 @@
 \newfontfamily{\display}[Alternate=1,Style=TitlingCaps]{SilentiumPro-RomanI}
 \frenchspacing
 %
-\RequirePackage{ifthen}% Guide4 10.3.5 (p192)
+% Type size
 \ifthenelse{\@ptsize = 0}{% 10pt base size
   \newcommand{\tiny}{\fontsize{6}{9}\selectfont}
   \newcommand{\scriptsize}{\fontsize{7}{10}\selectfont}
@@ -730,17 +730,6 @@
     \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
   \fi
   \vskip\belowcaptionskip}
-%
-%% Legacy support (Flynn 2.10) %%
-\DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
-\DeclareOldFontCommand{\sf}{\normalfont\sffamily}{\mathsf}
-\DeclareOldFontCommand{\tt}{\normalfont\ttfamily}{\mathtt}
-\DeclareOldFontCommand{\bf}{\normalfont\bfseries}{\mathbf}
-\DeclareOldFontCommand{\it}{\normalfont\itshape}{\mathit}
-\DeclareOldFontCommand{\sl}{\normalfont\slshape}{\@nomath\sl}
-\DeclareOldFontCommand{\sc}{\normalfont\scshape}{\@nomath\sc}
-\DeclareRobustCommand*\cal{\@fontswitch\relax\mathcal}
-\DeclareRobustCommand*\mit{\@fontswitch\relax\mathnormal}
 %
 %% Table of contents (Flynn 2.11) %%
 \newcommand\@pnumwidth{1.55em}
