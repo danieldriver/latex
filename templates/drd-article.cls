@@ -2,9 +2,9 @@
 %% This is the file `drd-article.cls', a LaTeX document class adapted by D.R. Driver.
 %% Some of his work is online at <www.danieldriver.com> and <www.github.com/danieldriver>.
 %%
-%% The class builds on the standard article class but aims to provide better typographic
-%% defaults. It is for personal use and presupposes the presence of proprietary fonts.  
-%% The source file `article.cls' was drawn from the 2012 LaTeX distribution base, here:
+%% This class builds on the standard article class but provides typographic defaults more
+%% to the author's liking. It is for personal use and presupposes the use of proprietary
+%% fonts. The source files were drawn from the 2012 LaTeX distribution base, here:
 %%   /usr/local/texlive/2012/texmf-dist/tex/latex/base/
 %%
 %% Comments refer to the following sources by abbreviation:
@@ -14,14 +14,14 @@
 %% 	 - Guide4: Helmut Kopka and Patrick W. Daly. *Guide to LaTeX.* 4th edition. Boston: Addison-Wesley, 2004.
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{drd-article}
-              [2012/02/20 v0.1.2
-               DRD's custom article class]
+\ProvidesClass{drd-article}[2012/02/20 v0.1.2 DRD's custom article class]
+%
 % Default values
 \newcommand\@ptsize{}
 \newif\if@restonecol
 \newif\if@titlepage
 \@titlepagefalse
+%
 % Paper size options
 \DeclareOption{a4paper}
    {\setlength\paperheight {297mm}%
@@ -48,6 +48,7 @@
    {\setlength\@tempdima   {\paperheight}%
     \setlength\paperheight {\paperwidth}%
     \setlength\paperwidth  {\@tempdima}}
+%
 % Type size and layout options
 \DeclareOption{10pt}{\renewcommand\@ptsize{0}}
 \DeclareOption{11pt}{\renewcommand\@ptsize{1}}
@@ -72,6 +73,7 @@
       }%
    \renewcommand\newblock{\par}}%
 }
+%
 % Apply options
 \ExecuteOptions{letterpaper,10pt,oneside,onecolumn,final}% Defaults
 \ProcessOptions
@@ -198,8 +200,7 @@
   \ifthenelse{\@ptsize = 0}{\setlength\parindent{13\p@}}{\setlength\parindent{14\p@}}
 \fi
 %
-%% Spacing (Flynn 2.4.1.2) %%
-% TK - adjust these per font size selection
+% Spacing
 \setlength\smallskipamount{3\p@ \@plus 1\p@ \@minus 1\p@}
 \setlength\medskipamount{6\p@ \@plus 2\p@ \@minus 2\p@}
 \setlength\bigskipamount{12\p@ \@plus 4\p@ \@minus 4\p@}
@@ -209,20 +210,19 @@
 \setlength\footskip{30\p@}
 \setlength\maxdepth{.5\topskip}
 %
-%% Text area (Flynn 2.4.1.3) %%
+% Text area
 \setlength\@tempdima{\paperwidth}
 \addtolength\@tempdima{-2in}
-%\setlength\@tempdimb{345\p@}% originally 360 for 11pt, 390 for 12pt
-\settowidth\@tempdimb{\normalfont abcdefghijklmnopqrstuvwxyz}
+\settowidth\@tempdimb{\normalfont abcdefghijklmnopqrstuvwxyz}% originally {345\p@} for 10pt, 360 for 11pt, 390 for 12pt
 \if@twocolumn
-  \ifdim\@tempdima>2\@tempdimb\relax
-	\setlength\textwidth{2\@tempdimb}
+  \ifdim\@tempdima>3.5\@tempdimb\relax
+	\setlength\textwidth{3.5\@tempdimb}
   \else
 	\setlength\textwidth{\@tempdima}
   \fi
 \else
-  \ifdim\@tempdima>\@tempdimb\relax
-	\setlength\textwidth{2.5\@tempdimb}% about the same as 66, and simpler: tex.stackexchange.com/questions/59626
+  \ifdim\@tempdima>2.7\@tempdimb\relax
+	\setlength\textwidth{2.7\@tempdimb}% simpler than Bringhurst's 66: tex.stackexchange.com/questions/59626
   \else
 	\setlength\textwidth{\@tempdima}
   \fi
@@ -236,7 +236,7 @@
 \setlength\textheight{\@tempcnta\baselineskip}
 \addtolength\textheight{\topskip}
 %
-%% Page margins (Flynn 2.4.1.4) %%
+% Page margins
 \if@twocolumn
  \setlength\marginparsep {10\p@}
 \else
@@ -280,7 +280,7 @@
 \addtolength\topmargin{-.5\topmargin}
 \@settopoint\topmargin
 %
-%% Footnote space (Flynn 2.4.1.5) %%
+% Footnote space
 \ifthenelse{\@ptsize = 0}{\setlength\footnotesep{6.65\p@}}{}
 \ifthenelse{\@ptsize = 1}{\setlength\footnotesep{7.7\p@}}{}
 \ifthenelse{\@ptsize = 2}{\setlength\footnotesep{8.4\p@}}{}
@@ -306,7 +306,7 @@
 \setlength\@dblfpbot{0\p@ \@plus 1fil}
 \setlength\partopsep{3\p@ \@plus 2\p@ \@minus 2\p@}
 %
-%% Lists (Flynn 2.4.1.6) %%
+% Lists
 \def\@listi{\leftmargin\leftmargini%
 			\ifthenelse{\@ptsize = 0}{
 			   \parsep 4\p@ \@plus2\p@ \@minus\p@
@@ -355,7 +355,7 @@
               \advance\labelwidth-\labelsep}
 % End input based on standard LaTeX distribution of `size10.clo'
 %
-%% Paragraph spacing and penalties (Flynn 2.4.1, 2.4.2) %%
+% Paragraph spacing
 \setlength\lineskip{1\p@} % makes negative leading impossible
 \setlength\normallineskip{1\p@}
 \renewcommand\baselinestretch{}
@@ -374,7 +374,7 @@
 \renewcommand\dbltopfraction{.7}
 \renewcommand\dblfloatpagefraction{.5}
 %
-%% Running heads (Flynn 2.4.3) %%
+% Running heads
 \if@twoside
   \def\ps@headings{%
       \let\@oddfoot\@empty\let\@evenfoot\@empty
@@ -414,7 +414,7 @@
     \let\subsectionmark\@gobble
     }
 %
-%% Titling (Flynn 2.4.4) %%
+% Titling
   \if@titlepage
   \newcommand\maketitle{\begin{titlepage}%
   \let\footnotesize\small
@@ -502,16 +502,16 @@
   \vskip 1.5em}
 \fi
 %
-%% Structure (Flynn 2.5) %%
+% Structure
 \setcounter{secnumdepth}{3}
-\newcounter {part}
-\newcounter {section}
-\newcounter {subsection}[section]
-\newcounter {subsubsection}[subsection]
-\newcounter {paragraph}[subsubsection]
-\newcounter {subparagraph}[paragraph]
-\renewcommand \thepart {\@Roman\c@part}
-\renewcommand \thesection {\@arabic\c@section}
+\newcounter{part}
+\newcounter{section}
+\newcounter{subsection}[section]
+\newcounter{subsubsection}[subsection]
+\newcounter{paragraph}[subsubsection]
+\newcounter{subparagraph}[paragraph]
+\renewcommand\thepart {\@Roman\c@part}
+\renewcommand\thesection {\upshape\@arabic\c@section}% section number styles will cascade to lower section numbers
 \renewcommand\thesubsection   {\thesection.\@arabic\c@subsection}
 \renewcommand\thesubsubsection{\thesubsection.\@arabic\c@subsubsection}
 \renewcommand\theparagraph    {\thesubsubsection.\@arabic\c@paragraph}
@@ -522,7 +522,6 @@
    \addvspace{4ex}%
    \@afterindentfalse
    \secdef\@part\@spart}
-
 \def\@part[#1]#2{%
     \ifnum \c@secnumdepth >\m@ne
       \refstepcounter{part}%
@@ -552,28 +551,28 @@
      \@afterheading}
 %
 % Section headings
-\newcommand\section{\@startsection {section}{1}{\z@}%
-                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
-                                   {2.3ex \@plus.2ex}%
-                                   {\normalfont\normalsize\addfontfeatures{Letters=Uppercase}\MakeUppercase}}
+\newcommand\section{\@startsection{section}{1}{\z@}%
+					{-3.5ex \@plus -1ex \@minus -.2ex}%
+					{2.3ex \@plus.2ex}%
+					{\normalfont\normalsize\addfontfeatures{Letters=Uppercase}\MakeUppercase}}
 \newcommand\subsection{\@startsection{subsection}{2}{\z@}%
-                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
-                                     {1.5ex \@plus .2ex}%
-                                     {\normalfont\normalsize\scshape\MakeLowercase}}
+					{-3.25ex\@plus -1ex \@minus -.2ex}%
+					{1.5ex \@plus .2ex}%
+					{\normalfont\normalsize\scshape\MakeLowercase}}
 \newcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
-                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
-                                     {1.5ex \@plus .2ex}%
-                                     {\normalfont\normalsize\itshape}}
+					{-3.25ex\@plus -1ex \@minus -.2ex}%
+					{1.5ex \@plus .2ex}%
+					{\normalfont\normalsize\itshape}}
 \newcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
-                                    {3.25ex \@plus1ex \@minus.2ex}%
-                                    {-1em}%
-                                    {\normalfont\normalsize\itshape}}
+					{3.25ex \@plus1ex \@minus.2ex}%
+					{-1em}%
+					{\normalfont\normalsize\itshape}}
 \newcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
-                                       {3.25ex \@plus1ex \@minus .2ex}%
-                                       {-1em}%
-                                      {\normalfont\normalsize\itshape}}
+					{3.25ex \@plus1ex \@minus .2ex}%
+					{-1em}%
+					{\normalfont\normalsize\itshape}}
 %
-%% Indents and margins (Flynn 2.6) %%
+% Indents and margins
 \if@twocolumn
   \setlength\leftmargini  {2em}
 \else
@@ -618,7 +617,7 @@
 \newcommand*\descriptionlabel[1]{\hspace\labelsep
                                 \normalfont\bfseries #1}
 %
-%% Abstract (Flynn 2.7) %%
+% Abstract
 \if@titlepage
   \newenvironment{abstract}{%
       \titlepage
@@ -643,7 +642,7 @@
       {\if@twocolumn\else\endquotation\fi}
 \fi
 %
-%% Quotation environments (Flynn 2.8) %%
+% Quotation environments
 \newenvironment{verse}
                {\let\\\@centercr
                 \list{}{\itemsep      \z@
@@ -684,7 +683,7 @@
   \setcounter{subsection}{0}%
   \gdef\thesection{\@Alph\c@section}}
 %
-%% Figures and tables (Flynn 2.9) %%
+% Figures and tables
 \setlength\arraycolsep{5\p@}
 \setlength\tabcolsep{6\p@}
 \setlength\arrayrulewidth{.4\p@}
@@ -733,7 +732,7 @@
   \fi
   \vskip\belowcaptionskip}
 %
-%% Table of contents (Flynn 2.11) %%
+% Table of contents
 \newcommand\@pnumwidth{1.55em}
 \newcommand\@tocrmarg{2.55em}
 \newcommand\@dotsep{4.5}
@@ -791,7 +790,7 @@
     }
 \let\l@table\l@figure
 %
-%% Bibliography and indent (Flynn 2.12) %%
+% Bibliography and indent
 \newdimen\bibindent
 \setlength\bibindent{1.5em}
 \newenvironment{thebibliography}[1]
@@ -835,7 +834,7 @@
 \newcommand\subsubitem{\@idxitem \hspace*{30\p@}}
 \newcommand\indexspace{\par \vskip 10\p@ \@plus5\p@ \@minus3\p@\relax}
 %
-%% Footnote rule, section name, date format, etc. (Flynn 2.13) %%
+% Footnote rule, section name, date format, etc.
 \renewcommand\footnoterule{%
   \kern-3\p@
   \hrule\@width.4\columnwidth
@@ -854,7 +853,7 @@
 \newcommand\partname{Part}
 \newcommand\appendixname{Appendix}
 \newcommand\abstractname{Abstract}
-\def\today{\number\day\space\ifcase\month\or
+\def\today{\number\day\space\ifcase\month\or% revised following Flynn 2.13
   January\or February\or March\or April\or May\or June\or
   July\or August\or September\or October\or November\or December\fi
   \space\number\year}
