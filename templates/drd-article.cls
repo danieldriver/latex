@@ -215,8 +215,8 @@
 \newlength\alphabetlength
 \settowidth\alphabetlength{\normalfont abcdefghijklmnopqrstuvwxyz}% originally {345\p@} for 10pt, 360 for 11pt, 390 for 12pt
 \if@twocolumn
-  \ifdim\@tempdima>3.5\alphabetlength\relax
-	\setlength\textwidth{3.5\alphabetlength}
+  \ifdim\@tempdima>4\alphabetlength\relax
+	\setlength\textwidth{4\alphabetlength}
   \else
 	\setlength\textwidth{\@tempdima}
   \fi
