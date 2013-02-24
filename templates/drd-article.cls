@@ -237,11 +237,7 @@
 \addtolength\textheight{\topskip}
 %
 % Page margins
-\if@twocolumn
- \setlength\marginparsep {10\p@}
-\else
-  \setlength\marginparsep{10\p@}
-\fi
+\setlength\marginparsep{1\@ptsize\p@}
 \ifthenelse{\@ptsize = 2}{\setlength\marginparpush{7\p@}}{\setlength\marginparpush{5\p@}}
 \if@twoside
   \setlength\@tempdima        {\paperwidth}
@@ -333,8 +329,6 @@
 				 \parsep   2\p@ \@plus\p@    \@minus\p@}
 			 \itemsep   \parsep
 			 }
-
-
 \def\@listiii{\leftmargin\leftmarginiii
               \labelwidth\leftmarginiii
               \advance\labelwidth-\labelsep
