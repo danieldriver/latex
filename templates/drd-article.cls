@@ -212,16 +212,17 @@
 % Text area
 \setlength\@tempdima{\paperwidth}
 \addtolength\@tempdima{-2in}
-\settowidth\@tempdimb{\normalfont abcdefghijklmnopqrstuvwxyz}% originally {345\p@} for 10pt, 360 for 11pt, 390 for 12pt
+\newlength\alphabetlength
+\settowidth\alphabetlength{\normalfont abcdefghijklmnopqrstuvwxyz}% originally {345\p@} for 10pt, 360 for 11pt, 390 for 12pt
 \if@twocolumn
-  \ifdim\@tempdima>3.5\@tempdimb\relax
-	\setlength\textwidth{3.5\@tempdimb}
+  \ifdim\@tempdima>3.5\alphabetlength\relax
+	\setlength\textwidth{3.5\alphabetlength}
   \else
 	\setlength\textwidth{\@tempdima}
   \fi
 \else
-  \ifdim\@tempdima>2.7\@tempdimb\relax
-	\setlength\textwidth{2.7\@tempdimb}% simpler than Bringhurst's 66: tex.stackexchange.com/questions/59626
+  \ifdim\@tempdima>2.7\alphabetlength\relax
+	\setlength\textwidth{2.7\alphabetlength}% simpler than Bringhurst's 66: tex.stackexchange.com/questions/59626
   \else
 	\setlength\textwidth{\@tempdima}
   \fi
