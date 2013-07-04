@@ -1,0 +1,72 @@
+%!TEX TS-program = XeLaTeX
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[10pt]{article}
+
+\usepackage{color}
+\newcommand\red[1]{\color{red} #1}
+
+\usepackage{fontspec,xltxtra}
+\setmainfont[Ligatures=TeX,
+  ItalicFont = EspinosaNova-Italic,
+    BoldFont = EspinosaNova-RotundaBoldAlt]{Espinosa Nova}
+\frenchspacing
+
+% provide \versal, a drop cap macro that can be read from a pandoc source (and ignored in HTML output)
+\usepackage{lettrine}
+  \setcounter{DefaultLines}{3}
+  \renewcommand\DefaultLoversize{0.02}
+  \renewcommand\LettrineFontHook{\fontspec[StylisticSet=1]{EspinosaNova-CapitularIV}} % I, II, III or IV
+% grab the first line after a macro, as per http://tex.stackexchange.com/questions/10426
+\newcommand*{\firstline}[2]{%
+  \newcommand*{#1}{%
+    \begingroup%
+    \escapechar=`\\%
+    \catcode\endlinechar=\active%
+    \csname\string#1\endcsname%
+  }%
+  \begingroup%
+  \escapechar=`\\%
+  \lccode`\~=\endlinechar%
+  \lowercase{%
+    \expandafter\endgroup
+    \expandafter\def\csname\string#1\endcsname##1~%
+  }{\endgroup#2\space}%
+}
+% build the macro itself: parse the line and output a colorized versal + small caps for n words
+\usepackage{xstring}
+\newcommand\nwords{3}% number of words to attach to the versal letter
+\newcommand\firstletters{{\red\MakeLowercase\firstletter}{\MakeUppercase\firstletter}}
+\firstline{\versal}{%
+  \StrPosition[\nwords]{#1}{\space}[\lastspace]
+  \noexpandarg\StrGobbleLeft{#1}{\lastspace}[\remainder]\fullexpandarg
+  \IfBeginWith{#1}{``}{%         case = true (begins with double quotes)
+    \StrChar{#1}{3}[\firstletter]
+    \StrBetween[1,\nwords]{#1}{\firstletter}{\space}[\firstwords]
+    \lettrine[lhang=0.19, ante=``\,]{\firstletters}{\firstwords}\space\remainder%
+  }{%                            case = false (begins without double quotes)
+    \StrChar{#1}{1}[\firstletter]
+    \StrBetween[1,\nwords]{#1}{\firstletter}{\space}[\firstwords]
+    \lettrine{\firstletters}{\firstwords}\space\remainder%
+  }%
+}
+
+\title{Brief Article}
+\author{The Author}
+%\date{}
+
+\begin{document}
+\maketitle
+
+\versal ``In the begynnynge God created heaven and erth.'' Thus begins {\bf William Tyndale's} translation 
+of Genesis, first published at Marburg in 1530, just six years before he was strangled and burnt at the stake for heresy. Ironically, Tyndale's work would make its way into the King James Bible. ``In the beginning God created the heaven and the earth.'' Gummies candy fruitcake. Bear claw gummi bears wafer pudding croissant gingerbread. Apple pie apple pie halvah marshmallow cupcake apple pie liquorice toffee muffin. Macaroon oat cake gummi bears carrot cake cake. Dragée cheesecake NERDIES cake. Donut chocolate bar gummi bears wafer carrot cake chocolate cupcake lollipop. Dragée chocolate bar tart candy caramels. Chocolate chupa chups caramels. Gingerbread lemon drops ice cream dragée jujubes jelly cake chupa chups caramels.
+
+Candy gummi bears jelly-o toffee. Biscuit chocolate bar brownie chupa chups applicake. Danish halvah soufflé. Macaroon jelly oat cake dragée jelly beans pastry jelly beans brownie. Pudding sugar plum gummi bears candy applicake sugar plum jelly-o. Jelly cupcake tootsie roll liquorice bear claw sweet cheesecake. Tiramisu ice cream bear claw jujubes. Oat cake powder danish.
+Ice cream topping chocolate cake. Halvah gingerbread oat cake toffee jelly beans jelly ice cream jujubes. Brownie gummies apple pie tart cotton candy jujubes cotton candy sesame snaps jelly. Toffee biscuit muffin cookie caramels topping. Topping powder candy canes oat cake danish cookie. Cake dessert lollipop tiramisu wafer dessert.
+
+\section{New Section, Sans Quotation Marks}
+
+\versal Jelly candy canes lemon drops muffin dessert fruitcake fruitcake tootsie roll. Ice cream macaroon oat cake croissant cheesecake bonbon. Tootsie roll bear claw jelly. Apple pie cotton candy halvah chocolate muffin jelly-o. Dragée dragée caramels pie tiramisu pastry chupa chups icing jelly-o. Ice cream tootsie roll apple pie tiramisu wafer. Toffee cookie wafer caramels chocolate cake macaroon. Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon.
+Danish cookie icing liquorice pie gummi bears jelly-o topping. Pastry sweet liquorice wafer jelly lemon drops. Tootsie roll lollipop oat cake wafer jujubes tiramisu sweet. Muffin chupa chups pastry icing topping. Jelly pastry cake candy canes.
+
+\end{document}  
