@@ -1,4 +1,13 @@
+%!TEX TS-program = XeLaTeX
+%!TEX encoding = UTF-8 Unicode
+
 \documentclass[twoside]{article}
+
+\usepackage{fontspec,xltxtra}
+\setmainfont[Ligatures=TeX]{Minion Pro}
+\setsansfont[Ligatures=TeX,Scale=MatchLowercase]{Scala Sans Pro}
+\setmonofont[Scale=MatchLowercase]{Menlo}
+\frenchspacing
 
 % Two known solutions, via Marco Daniel and Kevin Godby: <http://tex.stackexchange.com/questions/34368/>.
 % The `fullwidth` / `mdframed` packages work great with text, but cannot be wrapped around images
@@ -38,12 +47,22 @@
   \begin{multicols}{2}
     \lipsum[2]
   \end{multicols}
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics{./logo.png}
+    \caption{An image and a caption}
+  \end{figure}
 \end{fullwidth}
 
 \lipsum[3-4]
 
 \begin{fullwidth}
   \lipsum[5]
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics{./logo.png}
+    \caption{An image and a caption}
+  \end{figure}
   \begin{multicols}{2}
     \lipsum[6]
   \end{multicols}
