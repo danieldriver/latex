@@ -32,6 +32,18 @@
   \end{adjustwidth\if@twoside*\fi}}
 \makeatother
 
+\usepackage{floatrow,caption}% make use of full width with tables and figures
+
+\DeclareMarginSet{outside}{\setfloatmargins*{}{\hskip-\overhang}}
+\DeclareFloatSeparators{marginparsep}{\hskip\marginparsep}
+\captionsetup[capbesidefigure]{labelsep=newline,labelfont={bf},justification=raggedright}
+\floatsetup[figure]{margins=outside,floatwidth=\textwidth,%
+  capposition=beside,capbesideposition={top,outside},facing=yes,%
+  capbesidewidth=\marginparwidth,capbesidesep=marginparsep}
+
+% facing=yes or no needs to be set manually, checking for two side
+% perhaps I should extract this as a variable
+
 \usepackage{showframe}
 
 \title{Brief Article}
@@ -61,7 +73,7 @@
   \begin{figure}[htbp]
     \centering
     \includegraphics{./logo.png}
-    \caption{An image and a caption}
+    \caption{An image and a caption with rather longer text, requiring another line break or two in \LaTeX}
   \end{figure}
   \begin{multicols}{2}
     \lipsum[6]
@@ -70,4 +82,4 @@
 
 \lipsum[7]
 
-\end{document}  
+\end{document}
