@@ -1,0 +1,54 @@
+\documentclass[twoside]{article}
+
+% Two known solutions, via Marco Daniel and Kevin Godby: <http://tex.stackexchange.com/questions/34368/>.
+% The `fullwidth` / `mdframed` packages work great with text, but cannot be wrapped around images
+% and figures, which is how I'd like to use it with pandoc. Therefore, the Tufte-LaTeX route was preferred.
+
+\usepackage[strict]{changepage}% provides the adjustwidth environment
+\usepackage{multicol}% for multiple columns inside the fullwidth environment
+\usepackage{lipsum}
+
+% The following code should be used *after* any changes to the margins and
+% page layout are made (e.g., after the geometry package has been loaded).
+\newlength{\overhang}
+  \setlength{\overhang}{\marginparwidth}
+  \addtolength{\overhang}{\marginparsep}
+\newlength{\fullmeasure}
+  \setlength{\fullmeasure}{\textwidth}
+  \addtolength{\fullmeasure}{\overhang}
+
+\makeatletter
+\newenvironment{fullwidth}{%
+  \begin{adjustwidth\if@twoside*\fi}{}{-\overhang}}{%
+  \end{adjustwidth\if@twoside*\fi}}
+\makeatother
+
+\usepackage{showframe}
+
+\title{Brief Article}
+\author{The Author}
+%\date{}
+
+\begin{document}
+\maketitle
+
+\lipsum[1]
+
+\begin{fullwidth}
+  \begin{multicols}{2}
+    \lipsum[2]
+  \end{multicols}
+\end{fullwidth}
+
+\lipsum[3-4]
+
+\begin{fullwidth}
+  \lipsum[5]
+  \begin{multicols}{2}
+    \lipsum[6]
+  \end{multicols}
+\end{fullwidth}
+
+\lipsum[7]
+
+\end{document}  
