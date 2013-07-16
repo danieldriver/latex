@@ -54,6 +54,13 @@
   capposition=beside,capbesideposition={top,outside},\ifduplex facing=yes,\fi%
   capbesidewidth=\marginparwidth,capbesidesep=marginparsep}
 
+% Put footnotes in the margins as well. Note that footmisc needs hyperref links
+% to notes switched off, eg: \usepackage[hyperfootnotes=false,...]{hyperref}
+\usepackage[side,flushmargin,multiple]{footmisc}
+  \renewcommand{\footnotelayout}{\scriptsize\sffamily\raggedright}
+  \renewcommand{\multfootsep}{\symbol{"02D9}} % might want to borrow a superscript comma from Arno Pro or something
+\usepackage{marginfix}
+
 % Packages to show what's happening
 \usepackage{lipsum}
 \usepackage{showframe}
@@ -80,18 +87,23 @@
 
 \lipsum[3-4]
 
-\begin{fullwidth}
-  \lipsum[5]
-  \begin{figure}[htbp]
-    \centering
-    \includegraphics{./logo.png}
-    \caption{An image and a caption with rather longer text, requiring another line break or two in \LaTeX}
-  \end{figure}
-  \begin{multicols}{2}
-    \lipsum[6]
-  \end{multicols}
-\end{fullwidth}
+\begin{figure}[htbp]
+\centering
+\includegraphics{./logo.png}
+\caption{Same image again, in standard pandoc output. It comes from the \TeX\ Stack Exchange.}
+\end{figure}
 
-\lipsum[7]
+\lipsum[5]
+
+Here is a footnote reference,\footnote{Here is the footnote.} and
+another.\footnote{Here's one with multiple paragraphs.
+
+  In pandoc markdown, subsequent paragraphs are indented to show
+  that they belong to the previous footnote.
+
+  The whole paragraph can be indented, or just the first line. In this
+  way, multi-paragraph footnotes work like multi-paragraph list items.}
+
+This paragraph isn't be part of the note, because it isn't indented in pandoc.
 
 \end{document}
