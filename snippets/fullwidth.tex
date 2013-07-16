@@ -54,6 +54,11 @@
   capposition=beside,capbesideposition={top,outside},\ifduplex facing=yes,\fi%
   capbesidewidth=\marginparwidth,capbesidesep=marginparsep}
 
+% Add table support as pandoc renders (in longtable environments)
+% Unfortunately this is basically not supported in floatrow, but see this:
+% http://tex.stackexchange.com/questions/96008/longtable-captions-in-marginpar
+\usepackage{longtable}
+
 % Put footnotes in the margins as well. Note that footmisc needs hyperref links
 % to notes switched off, eg: \usepackage[hyperfootnotes=false,...]{hyperref}
 \usepackage[side,multiple]{footmisc}
@@ -108,5 +113,43 @@ Here are short footnote references,\footnote{Here is the first footnote.}\footno
   way, multi-paragraph footnotes work like multi-paragraph list items.}
 
 This paragraph isn't be part of the note, because it isn't indented in pandoc.
+
+\begin{longtable}[c]{@{}clrl@{}}
+\hline\noalign{\medskip}
+\begin{minipage}[b]{0.17\columnwidth}\centering
+Centered Header
+\end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\raggedright
+Default Aligned
+\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedleft
+Right Aligned
+\end{minipage} & \begin{minipage}[b]{0.35\columnwidth}\raggedright
+Left Aligned
+\end{minipage}
+\\\noalign{\medskip}
+\hline\noalign{\medskip}
+\begin{minipage}[t]{0.17\columnwidth}\centering
+First
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright
+row
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedleft
+12.0
+\end{minipage} & \begin{minipage}[t]{0.35\columnwidth}\raggedright
+Example of a row that spans multiple lines.
+\end{minipage}
+\\\noalign{\medskip}
+\begin{minipage}[t]{0.17\columnwidth}\centering
+Second
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright
+row
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedleft
+5.0
+\end{minipage} & \begin{minipage}[t]{0.35\columnwidth}\raggedright
+Here's another one. Note the blank line between rows.
+\end{minipage}
+\\\noalign{\medskip}
+\hline
+\noalign{\medskip}
+\caption{Here's the caption. In pandoc markdown it, too, may span multiple lines.}
+\end{longtable}
 
 \end{document}
