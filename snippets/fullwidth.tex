@@ -3,6 +3,12 @@
 
 \documentclass[twoside]{article}
 
+% make twoside setting into a more convenient conditional
+\newif\ifduplex
+\makeatletter
+  \if@twoside\duplextrue\fi
+\makeatother
+
 \usepackage{fontspec,xltxtra}
 \setmainfont[Ligatures=TeX]{Minion Pro}
 \setsansfont[Ligatures=TeX,Scale=MatchLowercase]{Scala Sans Pro}
@@ -26,20 +32,18 @@
   \setlength{\fullmeasure}{\textwidth}
   \addtolength{\fullmeasure}{\overhang}
 
-\makeatletter
 \newenvironment{fullwidth}{%
-  \begin{adjustwidth\if@twoside*\fi}{}{-\overhang}}{%
-  \end{adjustwidth\if@twoside*\fi}}
-\makeatother
+  \begin{adjustwidth\ifduplex*\fi}{}{-\overhang}}{%
+  \end{adjustwidth\ifduplex*\fi}}
 
 \usepackage[font={footnotesize,sf},labelfont=bf,labelsep=period]{caption}
 \usepackage{floatrow}% make use of full width with tables and figures
 
 \captionsetup[capbesidefloat]{justification=raggedright,singlelinecheck=false}
-\DeclareMarginSet{outside}{\setfloatmargins*{}{\hskip-\overhang}}
+\DeclareMarginSet{outside}{\ifduplex\setfloatmargins*{}{\hskip-\overhang}\fi}
 \DeclareFloatSeparators{marginparsep}{\hskip\marginparsep}
 \floatsetup[figure]{margins=outside,floatwidth=\textwidth,%
-  capposition=beside,capbesideposition={top,outside},facing=yes,%
+  capposition=beside,capbesideposition={top,outside},\ifduplex facing=yes,\fi,%
   capbesidewidth=\marginparwidth,capbesidesep=marginparsep}
 
 % facing=yes or no needs to be set manually, checking for two side
