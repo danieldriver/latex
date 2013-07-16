@@ -32,11 +32,12 @@
   \end{adjustwidth\if@twoside*\fi}}
 \makeatother
 
-\usepackage{floatrow,caption}% make use of full width with tables and figures
+\usepackage[font={footnotesize,sf},labelfont=bf,labelsep=period]{caption}
+\usepackage{floatrow}% make use of full width with tables and figures
 
+\captionsetup[capbesidefloat]{justification=raggedright,singlelinecheck=false}
 \DeclareMarginSet{outside}{\setfloatmargins*{}{\hskip-\overhang}}
 \DeclareFloatSeparators{marginparsep}{\hskip\marginparsep}
-\captionsetup[capbesidefigure]{labelsep=newline,labelfont={bf},justification=raggedright}
 \floatsetup[figure]{margins=outside,floatwidth=\textwidth,%
   capposition=beside,capbesideposition={top,outside},facing=yes,%
   capbesidewidth=\marginparwidth,capbesidesep=marginparsep}
