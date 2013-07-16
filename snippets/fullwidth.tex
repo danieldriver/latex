@@ -56,11 +56,14 @@
 
 % Put footnotes in the margins as well. Note that footmisc needs hyperref links
 % to notes switched off, eg: \usepackage[hyperfootnotes=false,...]{hyperref}
-\usepackage[side,flushmargin,multiple]{footmisc}
-  \renewcommand{\footnotelayout}{\sffamily\raggedright}
-%  \renewcommand{\multfootsep}{\symbol{"02D9}}
-% for Esipnosa Nova; might want to borrow a superscript comma from Minion Pro or something
-\usepackage{marginfix}% recommended I don't quite remember where; improves note placement
+\usepackage[side,multiple]{footmisc}
+\usepackage{marginfix}
+% Place fn mark in paragraph, and mark as tables and figures (bold + period).
+\makeatletter
+  \renewcommand\@makefntext[1]{%
+  \sffamily\raggedright\parindent=1em\noindent
+  {}{\bfseries\@thefnmark.}~#1}%
+\makeatother
 
 % Packages to show what's happening
 \usepackage{lipsum}
