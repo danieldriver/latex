@@ -10,54 +10,30 @@
 \setmonofont[Scale=MatchLowercase]{Menlo}
 \frenchspacing
 
-% Make twoside setting into a more convenient conditional, for fullwidth and floatrow.
-\newif\ifduplex
-\makeatletter
-  \if@twoside\duplextrue\fi
-\makeatother
-
-% Two known fullwidth solutions, via Marco Daniel and Kevin Godby:
-%     http://tex.stackexchange.com/questions/34368/how-to-switch-between-two-margin-sizes
-% The `fullwidth` / `mdframed` packages work great with text, but cannot be
-% wrapped around images and figures, which is less useful in pandoc markdown.
-% Therefore, Kevin's Tufte-LaTeX route was preferred.
-
-\usepackage[strict]{changepage}% provides the adjustwidth environment
-\usepackage{multicol}% for multiple columns inside the fullwidth environment
-
-% The following definitions should be used *after* any changes to the margins and
-% page layout are made (e.g., after geometry). They are used *both* here and in floatrow.
-\newlength{\overhang}
-  \setlength{\overhang}{\marginparwidth}
-  \addtolength{\overhang}{\marginparsep}
-\newlength{\fullmeasure}
-  \setlength{\fullmeasure}{\textwidth}
-  \addtolength{\fullmeasure}{\overhang}
-
-% A fullwidth environment
-\newenvironment{fullwidth}{%
-  \begin{adjustwidth\ifduplex*\fi}{}{-\overhang}}{%
-  \end{adjustwidth\ifduplex*\fi}}
-
-% Caption and floatrow packages redefine tables and figures. In particular,
-% I put sans serif captions in the margins for oneside and twoside layout.  
-% The documentation for floatrow is atrocious, but it does what it says if you
-% can parse it. One does hope the package routines are not as inefficient!
+% The caption + mcaption packages seem the easiest way to stylize captions
+% and put them in the marginpar space (floatrow feels unwieldy). Since longtable
+% is unresponsive to nearly all notes > margins solutions, I'll leave it out for now.
 
 \usepackage[font={footnotesize,sf},labelfont=bf,labelsep=period]{caption}
-\usepackage{floatrow}
+\captionsetup[figure]{justification=raggedright,singlelinecheck=false}
 
-\captionsetup[capbesidefloat]{justification=raggedright,singlelinecheck=false}
-\DeclareMarginSet{outside}{\ifduplex\setfloatmargins*{}{\hskip-\overhang}\fi}
-\DeclareFloatSeparators{marginparsep}{\hskip\marginparsep}
-\floatsetup[figure]{margins=outside,floatwidth=\textwidth,%
-  capposition=beside,capbesideposition={top,outside},\ifduplex facing=yes,\fi%
-  capbesidewidth=\marginparwidth,capbesidesep=marginparsep}
+\usepackage[top]{mcaption}
 
-% Add table support as pandoc renders (in longtable environments)
-% Unfortunately this is basically not supported in floatrow, but see this:
-% http://tex.stackexchange.com/questions/96008/longtable-captions-in-marginpar
+\let\oldfigure\figure
+\let\endoldfigure\endfigure
+\renewenvironment{figure}[1][]{%
+  \oldfigure[#1]\begin{margincap}}{%
+  \end{margincap}\endoldfigure}
+
+\let\oldtable\table% cf http://www.faqoverflow.com/tex/6033.html
+\let\endoldtable\endtable
+\renewenvironment{table}[1][ht]{%
+  \oldtable[#1]\begin{margincap}}{%
+  \end{margincap}\endoldtable}
+
 \usepackage{longtable}
+% Promising solution to put caption > margin: http://tex.stackexchange.com/a/96025
+% However, I've been unable to port it to the `caption` redefinition of \LT@makecaption
 
 % Put footnotes in the margins as well. Note that footmisc needs hyperref links
 % to notes switched off, eg: \usepackage[hyperfootnotes=false,...]{hyperref}
@@ -81,40 +57,46 @@
 \begin{document}
 \maketitle
 
-\lipsum[1]
+\lipsum[1-2]
 
-\begin{fullwidth}
-  \begin{multicols}{2}
-    \lipsum[2]
-  \end{multicols}
-  \begin{figure}[htbp]
-    \centering
-    \includegraphics{./logo.png}
-    \caption{An image and a caption}
-  \end{figure}
-\end{fullwidth}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{./logo.png}
+  \caption{An image and a caption}
+\end{figure}
 
 \lipsum[3-4]
 
 \begin{figure}[htbp]
 \centering
 \includegraphics{./logo.png}
-\caption{Same image again, in standard pandoc output. It comes from the \TeX\ Stack Exchange.}
+\caption{Same image again, in standard pandoc output. It comes from the \TeX\ Stack Exchange. It has such a long caption that it spills to two lines even in the main \texttt{textwidth} section.}
 \end{figure}
 
 \lipsum[5]
 
-Here are short footnote references,\footnote{Here is the first footnote.}\footnote{Here is the second.} and another long one.\footnote{Here's one with multiple paragraphs.
-
-  In pandoc markdown, subsequent paragraphs are indented to show
-  that they belong to the previous footnote.
-
-  The whole paragraph can be indented, or just the first line. In this
-  way, multi-paragraph footnotes work like multi-paragraph list items.}
+Here are short footnote references,\footnote{Here is the first footnote.}\footnote{Here is the second.} and another long one.
 
 This paragraph isn't be part of the note, because it isn't indented in pandoc.
 
-\begin{longtable}[c]{@{}clrl@{}}
+\begin{table}
+    \centering
+    \begin{tabular}{rrrrrrrrr}
+        1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+        1 & 1 & 1 & 1 & 1 & 1 & 1 & 1
+    \end{tabular}
+    \caption{Caption of the normal \texttt{table} environment.}
+    \label{table}
+\end{table}
+
+\begin{longtable}{rrrrrrrrr}
+    1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+    1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+    \caption{Caption of the \texttt{longtable} environment.}
+    \label{longtable}
+\end{longtable}
+
+\begin{longtable}[c]{@{}clrl@{}} % standard output from pandoc markdown input
 \hline\noalign{\medskip}
 \begin{minipage}[b]{0.17\columnwidth}\centering
 Centered Header
