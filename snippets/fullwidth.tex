@@ -7,54 +7,47 @@
 \usepackage{fontspec}
 \setmainfont[Ligatures=TeX]{Minion Pro}
 \setsansfont[Ligatures=TeX]{Scala Sans Pro}
-\setmonofont[Scale=MatchLowercase]{Menlo}
+\setmonofont[Scale=MatchUppercase]{Menlo}
 \frenchspacing
 
 % Implement ccaption package and options
 % Note that longtable must be called first if is to be acted upon by ccaption
+% Missing? Lost from caption is the useful singlelinecheck=false option. Workaround TK?
 \usepackage{ccaption}
 \captiondelim{. }
 \captionnamefont{\bfseries\sffamily\footnotesize}
 \captiontitlefont{\sffamily\footnotesize}
+% By calling it later, though, I can introduce a modified version of ccaption's mod of longtable.
+% For further mods see the ccaption documentation at Section 5.5.
+% And for an idea about moving the caption > margin see: http://tex.stackexchange.com/a/96025
+\usepackage{longtable}
+\makeatletter
+\def\LT@makecaption#1#2#3{%
+  \LT@mcol\LT@cols c{\hb@xt@ \z@{\hss\parbox[t]\LTcapwidth{%
+    \sbox\@tempboxa{#1{{\@contnfont #2\@contdelim}}\@conttfont #3}%
+    \ifdim\wd\@tempboxa>\hsize
+      #1{{\@contnfont #2\@contdelim}}\@conttfont #3%
+    \else
+      \hb@xt@ \hsize{\hfil\box\@tempboxa\hfil}%
+    \fi
+    \endgraf\vskip\belowcaptionskip}%
+  \hss}}}
+\makeatother 
 
+% Put standard figure and table captions in the margin
 \usepackage[top]{mcaption}
-
+% Bake margincap into all figures 
 \let\oldfigure\figure
 \let\endoldfigure\endfigure
 \renewenvironment{figure}[1][]{%
   \oldfigure[#1]\begin{margincap}}{%
   \end{margincap}\endoldfigure}
-
+% Bake margincap into all tables
 \let\oldtable\table% cf http://www.faqoverflow.com/tex/6033.html
 \let\endoldtable\endtable
 \renewenvironment{table}[1][ht]{%
   \oldtable[#1]\begin{margincap}}{%
   \end{margincap}\endoldtable}
-
-\usepackage{longtable,ltcaption}
-% Promising solution to put caption > margin: http://tex.stackexchange.com/a/96025
-% However, it needs to use the `caption` redefinition of \LT@makecaption = \caption@LT@make
-%
-%\makeatletter
-%\def\caption@LT@make#1{%
-%  \noalign{\smash{\hbox{\kern\textwidth\rlap{\kern\marginparsep
-%  \parbox[t]{\marginparwidth}{#1}}}}}}
-%\makeatother
-
-% Another possibility via http://www.stanford.edu/group/SOL/dissertations/mpfthesis-example.tex
-%\makeatletter
-%\def\LT@makecaption#1#2#3{%
-%  \LT@mcol\LT@cols c{\hbox to\z@{\hss\parbox[t]\LTcapwidth{%
-%    \sbox\@tempboxa{#1{\scshape #2 }\normalfont\itshape #3}%
-%    \ifdim\wd\@tempboxa>\hsize
-%      \centering #1{\scshape #2 }\\\normalfont\itshape #3%
-%    \else
-%      \centering #1{\scshape #2 }\\\normalfont\itshape #3%
-%%      \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
-%    \fi
-%    \endgraf\vskip\baselineskip}%
-%  \hss}}}
-%\makeatother
 
 % Put footnotes in the margins as well. Note that footmisc needs hyperref links
 % to notes switched off, eg: \usepackage[hyperfootnotes=false,...]{hyperref}
