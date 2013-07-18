@@ -12,11 +12,11 @@
 
 % Implement ccaption package and options
 % Note that longtable must be called first if is to be acted upon by ccaption
-% Missing? Lost from caption is the useful singlelinecheck=false option. Workaround TK?
 \usepackage{ccaption}
 \captiondelim{. }
 \captionnamefont{\bfseries\sffamily\footnotesize}
 \captiontitlefont{\sffamily\footnotesize}
+\captionstyle{\raggedright}
 % By calling it later, though, I can introduce a modified version of ccaption's mod of longtable.
 % For further mods see the ccaption documentation at Section 5.5.
 % And for an idea about moving the caption > margin see: http://tex.stackexchange.com/a/96025
