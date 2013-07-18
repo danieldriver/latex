@@ -31,9 +31,30 @@
   \oldtable[#1]\begin{margincap}}{%
   \end{margincap}\endoldtable}
 
-\usepackage{longtable}
+\usepackage{longtable,ltcaption}
 % Promising solution to put caption > margin: http://tex.stackexchange.com/a/96025
-% However, I've been unable to port it to the `caption` redefinition of \LT@makecaption
+% However, it needs to use the `caption` redefinition of \LT@makecaption = \caption@LT@make
+%
+%\makeatletter
+%\def\caption@LT@make#1{%
+%  \noalign{\smash{\hbox{\kern\textwidth\rlap{\kern\marginparsep
+%  \parbox[t]{\marginparwidth}{#1}}}}}}
+%\makeatother
+
+% Another possibility via http://www.stanford.edu/group/SOL/dissertations/mpfthesis-example.tex
+%\makeatletter
+%\def\LT@makecaption#1#2#3{%
+%  \LT@mcol\LT@cols c{\hbox to\z@{\hss\parbox[t]\LTcapwidth{%
+%    \sbox\@tempboxa{#1{\scshape #2 }\normalfont\itshape #3}%
+%    \ifdim\wd\@tempboxa>\hsize
+%      \centering #1{\scshape #2 }\\\normalfont\itshape #3%
+%    \else
+%      \centering #1{\scshape #2 }\\\normalfont\itshape #3%
+%%      \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+%    \fi
+%    \endgraf\vskip\baselineskip}%
+%  \hss}}}
+%\makeatother
 
 % Put footnotes in the margins as well. Note that footmisc needs hyperref links
 % to notes switched off, eg: \usepackage[hyperfootnotes=false,...]{hyperref}
@@ -73,7 +94,7 @@
 \caption{Same image again, in standard pandoc output. It comes from the \TeX\ Stack Exchange. It has such a long caption that it spills to two lines even in the main \texttt{textwidth} section.}
 \end{figure}
 
-\lipsum[5]
+\lipsum[5-7]
 
 Here are short footnote references,\footnote{Here is the first footnote.}\footnote{Here is the second.} and another long one.
 
@@ -133,5 +154,7 @@ Here's another one. Note the blank line between rows.
 \noalign{\medskip}
 \caption{Here's the caption. In pandoc markdown it, too, may span multiple lines.}
 \end{longtable}
+
+\lipsum[1]
 
 \end{document}
