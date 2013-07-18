@@ -10,12 +10,12 @@
 \setmonofont[Scale=MatchLowercase]{Menlo}
 \frenchspacing
 
-% The caption + mcaption packages seem the easiest way to stylize captions
-% and put them in the marginpar space (floatrow feels unwieldy). Since longtable
-% is unresponsive to nearly all notes > margins solutions, I'll leave it out for now.
-
-\usepackage[font={footnotesize,sf},labelfont=bf,labelsep=period]{caption}
-\captionsetup[figure]{justification=raggedright,singlelinecheck=false}
+% Implement ccaption package and options
+% Note that longtable must be called first if is to be acted upon by ccaption
+\usepackage{ccaption}
+\captiondelim{. }
+\captionnamefont{\bfseries\sffamily\footnotesize}
+\captiontitlefont{\sffamily\footnotesize}
 
 \usepackage[top]{mcaption}
 
