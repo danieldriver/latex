@@ -10,29 +10,9 @@
 \setmonofont[Scale=MatchLowercase]{Nitti}
 \frenchspacing
 
-% Implement ccaption package and options
-% Note that longtable must be called first if is to be acted upon by ccaption
-\usepackage{ccaption}
-\captiondelim{. }
-\captionnamefont{\bfseries\sffamily\footnotesize}
-\captiontitlefont{\sffamily\footnotesize}
-\captionstyle{\raggedright}
-% By calling it later, though, I can introduce a modified version of ccaption's mod of longtable.
-% For further mods see the ccaption documentation at Section 5.5.
-% And for an idea about moving the caption > margin see: http://tex.stackexchange.com/a/96025
-\usepackage{longtable}
-\makeatletter
-\def\LT@makecaption#1#2#3{%
-  \LT@mcol\LT@cols c{\hb@xt@ \z@{\hss\parbox[t]\LTcapwidth{%
-    \sbox\@tempboxa{#1{{\@contnfont #2\@contdelim}}\@conttfont #3}%
-    \ifdim\wd\@tempboxa>\hsize
-      #1{{\@contnfont #2\@contdelim}}\@conttfont #3%
-    \else
-      \hb@xt@ \hsize{\hfil\box\@tempboxa\hfil}%
-    \fi
-    \endgraf\vskip\belowcaptionskip}%
-  \hss}}}
-\makeatother 
+% Set captions in sans serif (and sans package; see §3 in `texdoc ccaption`)
+\makeatletter\renewcommand{\fnum@figure}[1]{\sffamily\footnotesize\textbf{\figurename~\thefigure}.}
+\renewcommand{\fnum@table}[1]{\sffamily\footnotesize\textbf{\tablename~\thetable}.}\makeatother
 
 % Put standard figure and table captions in the margin
 \usepackage[top]{mcaption}
@@ -48,6 +28,22 @@
 \renewenvironment{table}[1][ht]{%
   \oldtable[#1]\begin{margincap}}{%
   \end{margincap}\endoldtable}
+
+% Call longtable and put its captions in the margin (TK)
+\usepackage{longtable}
+% For mod ideas see texdoc ccaption at §5.5, and http://tex.stackexchange.com/a/96025
+%\makeatletter
+%\def\LT@makecaption#1#2#3{%
+%  \LT@mcol\LT@cols c{\hb@xt@ \z@{\hss\parbox[t]\LTcapwidth{%
+%    \sbox\@tempboxa{#1{{\@contnfont #2\@contdelim}}\@conttfont #3}%
+%    \ifdim\wd\@tempboxa>\hsize
+%      #1{{\@contnfont #2\@contdelim}}\@conttfont #3%
+%    \else
+%      \hb@xt@ \hsize{\hfil\box\@tempboxa\hfil}%
+%    \fi
+%    \endgraf\vskip\belowcaptionskip}%
+%  \hss}}}
+%\makeatother 
 
 % Put footnotes in the margins as well. Note that footmisc needs hyperref links
 % to notes switched off, eg: \usepackage[hyperfootnotes=false,...]{hyperref}
