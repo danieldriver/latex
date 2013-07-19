@@ -184,7 +184,13 @@
 
 \lipsum[5-7]
 
-Here are short footnote references,\footnote{Here is the first footnote.}\footnote{Here is the second.} and another long one.
+Here are short footnote references,\footnote{Here is the first footnote.}\footnote{Here is the second.} and another long one.%\footnote{Here's one with multiple paragraphs.
+%
+%  In pandoc markdown, subsequent paragraphs are indented to show
+%  that they belong to the previous footnote.
+%
+%  The whole paragraph can be indented, or just the first line. In this
+%  way, multi-paragraph footnotes work like multi-paragraph list items.}
 
 This paragraph isn't be part of the note, because it isn't indented in pandoc.
 
