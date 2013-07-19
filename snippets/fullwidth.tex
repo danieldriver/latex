@@ -25,7 +25,7 @@
   \end{margincap}\endoldfigure}
 % Call longtable and put its captions in the margin, for single or facing pages
 \usepackage{longtable}
-\usepackage[strict]{changepage}
+\usepackage[strict]{changepage}% provides \adjustwidth as well
 \setlength\LTpost{0pt}
 \makeatletter
 \def\LT@makecaption#1#2#3{% cf http://tex.stackexchange.com/a/96025
@@ -52,6 +52,13 @@
   \renewcommand\@makefntext[1]{%
   \sffamily\raggedright\parindent=1em\noindent
   {}{\bfseries\@thefnmark.}~#1}%
+\makeatother
+
+% Create fullwidth environment
+\makeatletter
+\newenvironment{fullwidth}{%
+  \begin{adjustwidth\if@twoside*\fi}{}{\dimexpr-\marginparsep-\marginparwidth\relax}}{%
+  \end{adjustwidth\if@twoside*\fi}}
 \makeatother
 
 % Packages to show what's happening
@@ -140,6 +147,8 @@ Here's another one. Note the blank line between rows.
 \caption{Here's the caption. In pandoc markdown it, too, may span multiple lines.}
 \end{longtable}
 
+\begin{fullwidth}
 \lipsum[9]
+\end{fullwidth}
 
 \end{document}
