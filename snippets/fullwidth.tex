@@ -43,13 +43,11 @@
   \rlap{\parbox[b]{\marginparwidth}{\raggedright#1{#2: }#3\medskip}}
   }}}%
 }%
-\makeatother 
-
-% Put footnotes in the margins as well. Note that footmisc needs hyperref links
+\makeatother
+% Put footnotes in the margins as well -- ote that footmisc needs hyperref links
 % to notes switched off, eg: \usepackage[hyperfootnotes=false,...]{hyperref}
 \usepackage[side,multiple]{footmisc}
 \usepackage{marginfix}
-% Place fn mark in paragraph, and mark as tables and figures (bold + period).
 \makeatletter
   \renewcommand\@makefntext[1]{%
   \sffamily\raggedright\parindent=1em\noindent
@@ -58,7 +56,7 @@
 
 % Packages to show what's happening
 \usepackage{lipsum}
-\usepackage{showframe}
+%\usepackage{showframe}
 
 \title{Brief Article}
 \author{The Author}
