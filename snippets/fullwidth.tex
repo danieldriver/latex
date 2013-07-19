@@ -13,38 +13,125 @@
 % Set captions in sans serif (and sans package; see §3 in `texdoc ccaption`)
 \makeatletter\renewcommand{\fnum@figure}[1]{\sffamily\footnotesize\textbf{\figurename~\thefigure}.}
 \renewcommand{\fnum@table}[1]{\sffamily\footnotesize\textbf{\tablename~\thetable}.}
-% reference \@makecaption in /usr/local/texlive/2012/texmf-dist/source/latex/base/classes.dtx
-%\setlength\abovecaptionskip{0\p@}
-\renewcommand{\@makecaption}[2]{%
-  \vskip\abovecaptionskip
-  \sbox\@tempboxa{#1: #2}%
-  \ifdim \wd\@tempboxa >\hsize
-    #1: #2\par
-  \else
-    \global \@minipagefalse
-    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
-  \fi
-  \vskip\belowcaptionskip}
+% Remove caption skip and set them ragged (cf /usr/local/texlive/2012/texmf-dist/source/latex/base/classes.dtx)
+\renewcommand{\@makecaption}[2]{\raggedright#1: #2\par}
 \makeatother
-
-% Put standard figure and table captions in the margin
-\usepackage[top]{mcaption}
-% Bake margincap into all figures 
+% Marginalize figure and table captions using this fork of Stephan Hennig's `mcaption` package
+% (v3.0 [2009/03/13], cf `texdoc mcaption` and /usr/local/texlive/2012/texmf-dist/tex/latex/mcaption/mcaption.sty)
+\usepackage[strict]{changepage}
+\makeatletter
+% 1. Define initial commands and storage boxes
+\newcommand*{\marginalize@CaptionLong}{}
+\newcommand*{\marginalize@CaptionShort}{}
+\newcommand*{\marginalize@CaptionFlag}{}
+\newcommand*{\marginalize@Label}{}
+\newcommand*{\marginalize@LabelFlag}{}
+\newsavebox{\marginalize@ObjectBox}
+\newsavebox{\marginalize@CaptionBox}
+% 2. Make marginalize environment
+\newenvironment{marginalize}{% collect the \caption and \label commands
+  \let\marginalize@origcaption\caption%
+  \let\caption\marginalize@caption%
+  \gdef\marginalize@CaptionFlag{f}%
+  \let\marginalize@origlabel\label%
+  \let\label\marginalize@label%
+  \gdef\marginalize@LabelFlag{f}%
+  \begin{lrbox}{\marginalize@ObjectBox}% place environment contents in a box
+    \begin{minipage}{\linewidth}%
+}{%
+    \end{minipage}%
+  \end{lrbox}%
+  \let\caption\marginalize@origcaption% restore original caption and label
+  \let\label\marginalize@origlabel%
+  \marginalize@align@boxes% ship out results for processing
+  \marginalize@output@boxes%
+}%
+% 3. Define auxillary storage commands
+\newcommand*{\marginalize@origcaption}{}% store original commands
+\newcommand*{\marginalize@origlabel}{}
+% seemingly needless \mcaption@DefaultOpt removed -- a mere appendectomy?
+\newcommand*{\marginalize@caption}[2][]{% extract and flag the caption
+  \gdef\marginalize@CaptionShort{#1}%
+  \gdef\marginalize@CaptionLong{#2}%
+  \gdef\marginalize@CaptionFlag{t}%
+  \ignorespaces
+}%
+\newcommand*{\marginalize@label}[1]{% extract and flag the label
+  \gdef\marginalize@Label{#1}%
+  \gdef\marginalize@LabelFlag{t}%
+  \ignorespaces
+}%
+% 4. Prepare and align contents and caption boxes
+\newcommand*{\marginalize@align@boxes}{%
+  \begin{lrbox}{\marginalize@CaptionBox}% process caption or make an empty box
+    \begin{minipage}{\marginparwidth}%
+      \if\marginalize@CaptionFlag t%
+        \caption[\marginalize@CaptionShort]{\strut\marginalize@CaptionLong\strut}
+      \fi%
+      \if\marginalize@LabelFlag t%
+        \label{\marginalize@Label}%
+      \fi%
+    \end{minipage}%
+  \end{lrbox}%
+  % Wrap contents in zero height lines and use \vtop to peg alignment (alt: \vbox for bottom)
+  % TK -- could set ObjectBox to \vbox to get caption below it, e.g. for a full-width * variation
+  \sbox{\marginalize@ObjectBox}{\vtop{%
+    \vskip0pt%
+    \hbox{\usebox{\marginalize@ObjectBox}}%
+    \vskip0pt}%
+  }%
+  \sbox{\marginalize@CaptionBox}{\vtop{%
+    \vskip0pt%
+    \hbox{\usebox{\marginalize@CaptionBox}}%
+    \vskip0pt}%
+  }%
+}%
+% 5. Output the contents and the caption box
+\newcommand*{\marginalize@output@oddpage}{% for odd pages
+  \makebox[\linewidth][l]{%
+    \usebox{\marginalize@ObjectBox}%
+    \hspace*{\marginparsep}%
+    \smash{\usebox{\marginalize@CaptionBox}}%
+  }%
+}%
+\newcommand*{\marginalize@output@evenpage}{% for even pages
+  \makebox[\linewidth][r]{%
+    \smash{\usebox{\marginalize@CaptionBox}}%
+    \hspace*{\marginparsep}%
+    \usebox{\marginalize@ObjectBox}%
+  }%
+}%
+\newcommand*{\marginalize@output@boxes}{% finally, check the pages and build the appropriate layouts
+  \if@twoside%
+    \checkoddpage%
+    \ifoddpage%
+      \marginalize@output@oddpage%
+    \else%
+      \marginalize@output@evenpage%
+    \fi%
+  \else%
+    \marginalize@output@oddpage%
+  \fi%
+}%
+\makeatother
+% End fork of mcaption package
+% 
+% 6. Bake marginalize environment into all figures and tables
 \let\oldfigure\figure
 \let\endoldfigure\endfigure
 \renewenvironment{figure}[1][]{%
-  \oldfigure[#1]\begin{margincap}}{%
-  \end{margincap}\endoldfigure}
-% Bake margincap into all tables
-\let\oldtable\table% cf http://www.faqoverflow.com/tex/6033.html
+  \oldfigure[#1]\begin{marginalize}}{%
+  \end{marginalize}\endoldfigure}
+\let\oldtable\table
 \let\endoldtable\endtable
 \renewenvironment{table}[1][ht]{%
-  \oldtable[#1]\begin{margincap}}{%
-  \end{margincap}\endoldtable}
+  \oldtable[#1]\begin{marginalize}}{%
+  \end{marginalize}\endoldtable}
+% add tabular? cf http://www.faqoverflow.com/tex/6033.html
 
 % Call longtable and put its captions in the margin (TK)
 \usepackage{longtable}
-% For mod ideas see texdoc ccaption at §5.5, and http://tex.stackexchange.com/a/96025
+% For mod ideas see `texdoc ccaption` at §5.5, and http://tex.stackexchange.com/a/96025
 %\makeatletter
 %\def\LT@makecaption#1#2#3{%
 %  \LT@mcol\LT@cols c{\hb@xt@ \z@{\hss\parbox[t]\LTcapwidth{%
