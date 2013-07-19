@@ -11,7 +11,8 @@
 \frenchspacing
 
 % Set captions in sans serif (and sans package; see §3 in `texdoc ccaption`)
-\makeatletter\renewcommand{\fnum@figure}[1]{\sffamily\footnotesize\textbf{\figurename~\thefigure}.}
+\makeatletter
+\renewcommand{\fnum@figure}[1]{\sffamily\footnotesize\textbf{\figurename~\thefigure}.}
 \renewcommand{\fnum@table}[1]{\sffamily\footnotesize\textbf{\tablename~\thetable}.}
 % Remove caption skip and set them ragged (cf /usr/local/texlive/2012/texmf-dist/source/latex/base/classes.dtx)
 \renewcommand{\@makecaption}[2]{\raggedright#1: #2\par}
@@ -128,21 +129,20 @@
   \end{marginalize}\endoldtable}
 % add tabular? cf http://www.faqoverflow.com/tex/6033.html
 
-% Call longtable and put its captions in the margin (TK)
+% Call longtable and put its captions in the margin (cf http://tex.stackexchange.com/a/96025)
 \usepackage{longtable}
-% For mod ideas see `texdoc ccaption` at §5.5, and http://tex.stackexchange.com/a/96025
-%\makeatletter
-%\def\LT@makecaption#1#2#3{%
-%  \LT@mcol\LT@cols c{\hb@xt@ \z@{\hss\parbox[t]\LTcapwidth{%
-%    \sbox\@tempboxa{#1{{\@contnfont #2\@contdelim}}\@conttfont #3}%
-%    \ifdim\wd\@tempboxa>\hsize
-%      #1{{\@contnfont #2\@contdelim}}\@conttfont #3%
-%    \else
-%      \hb@xt@ \hsize{\hfil\box\@tempboxa\hfil}%
-%    \fi
-%    \endgraf\vskip\belowcaptionskip}%
-%  \hss}}}
-%\makeatother 
+\makeatletter
+\def\LT@makecaption#1#2#3{%
+  \LT@mcol\LT@cols c{\hbox to\z@{\hss\parbox[t]\LTcapwidth{% original definition in longtable.sty
+    \sbox\@tempboxa{#1{#2: }#3}%
+    \ifdim\wd\@tempboxa>\hsize
+      #1{#2: }#3%
+    \else
+      \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+    \fi
+    \endgraf\vskip\baselineskip}%
+  \hss}}}
+\makeatother 
 
 % Put footnotes in the margins as well. Note that footmisc needs hyperref links
 % to notes switched off, eg: \usepackage[hyperfootnotes=false,...]{hyperref}
