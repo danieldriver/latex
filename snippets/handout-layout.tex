@@ -4,7 +4,7 @@
 \documentclass[11pt,twoside]{article}
 
 % Page layout
-\usepackage[body={28pc,56pc},marginparsep=1pc,marginparwidth=12pc,%showframe,
+\usepackage[body={28pc,56pc},marginparsep=1pc,marginparwidth=12pc,showframe,
   includemp,hmarginratio=1:1,vmarginratio=1:2]{geometry}
 
 % Font size and leading (defaults: http://en.wikibooks.org/wiki/LaTeX/Fonts#Sizing_text)
@@ -50,12 +50,18 @@
 \AtBeginDocument{\marginpar{\centering\T\large ((notes\char"0020\&\char"0020 ideas))}}% put in a header
 \newcommand{\aside}[1]{\marginpar{\sffamily\footnotesize\raggedright\parindent=1em\noindent #1}}% \aside command
 \usepackage{marginnote}% better vertical alignment, and no fuss about r- and l-alignment
-\newcommand{\nb}{\marginnote[% pointer command: \nb
-  \sffamily\huge\char"EA3D\kern-1.7pt]{%
-  \sffamily\huge\kern-1.5pt\char"EA3E}}%
 \newcommand{\hello}{\marginnote[% handshake command: \hello
   \sffamily\huge\char"EA14\kern-3.5pt]{%
   \sffamily\huge\kern-3.1pt\char"EA14}}%
+\newcommand{\nb}{\marginnote[% pointer command: \nb
+  \sffamily\huge\char"EA3D\kern-1.7pt]{%
+  \sffamily\huge\kern-1.5pt\char"EA3E}}%
+\newcommand{\reminder}{\marginnote[% reminder command: \reminder
+  \sffamily\huge\char"EA4D\kern-1.7pt]{%
+  \sffamily\huge\kern-1.5pt\char"EA4E}}%
+\newcommand{\thebird}{\marginnote[% and for special use: \thebird
+  \sffamily\huge\char"EA11\kern-2.6pt]{%
+  \sffamily\huge\kern-2.4pt\char"EA11}}%
 
 % Colo(u)r
 \usepackage{xcolor}
