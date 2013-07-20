@@ -4,11 +4,10 @@
 \documentclass[twoside]{article}
 
 % Page layout
-\usepackage[%
-showframe,
-]{geometry}
-\geometry{letterpaper,body={28pc,56pc},marginparsep=1pc,marginparwidth=12pc,includemp,hmarginratio=1:1}
-\AtBeginDocument{\marginpar{\T\centering ((notes\char"0020\&\char"0020 ideas))}}% label marginpar column
+\usepackage[body={28pc,56pc},marginparsep=1pc,marginparwidth=12pc,%showframe,
+  includemp,hmarginratio=1:1,vmarginratio=1:2]{geometry}
+\usepackage{marginfix}% ``fix'' margins and put a header over the first margin
+\AtBeginDocument{\marginpar{\T\centering ((notes\char"0020\&\char"0020 ideas))}}
 
 % Font size and leading (defaults: http://en.wikibooks.org/wiki/LaTeX/Fonts#Sizing_text)
 \renewcommand\tiny{\fontsize{6}{9}\selectfont}
@@ -80,14 +79,6 @@ showframe,
     \lettrine{\firstletters}{\firstwords}\space\remainder%
   }%
 }
-
-\usepackage[side,flushmargin,multiple]{footmisc}
-  \renewcommand{\footnotelayout}{\scriptsize\sffamily\raggedright}
-  \renewcommand{\multfootsep}{\symbol{"02D9}} % might want to borrow a superscript comma from Arno Pro or something
-\usepackage{marginfix}
-
-% Note that footmisc needs some hyperref links to notes switched off, eg:
-% \usepackage[hyperfootnotes=false,...]{hyperref}
 
 \title{\addfontfeatures{Letters=SmallCaps} The Heavens and the Earth}
 \author{\bfseries Genesis 1 \and \bfseries Psalm 104}
