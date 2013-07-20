@@ -64,14 +64,14 @@
   \sffamily\huge\kern-2.4pt\char"EA11}}%
 
 % Colo(u)r
-\usepackage{xcolor}
-\newcommand\red[1]{\color{purple} #1}
+\usepackage[x11names,hyperref]{xcolor}
+\newcommand\red[1]{\color{Red3} #1}
 
 % provide \versal, a drop cap macro that can be read from a pandoc source (and ignored in HTML output)
 \usepackage{lettrine}
   \setcounter{DefaultLines}{3}
   \renewcommand\DefaultLoversize{0.02}
-  \renewcommand\LettrineFontHook{\fontspec[StylisticSet=1]{EspinosaNova-CapitularIV}} % I, II, III or IV
+  \renewcommand\LettrineFontHook{\fontspec[StylisticSet=1]{EspinosaNova-CapitularIV}}
 % grab the first line after a macro, as per http://tex.stackexchange.com/questions/10426
 \newcommand*{\firstline}[2]{%
   \newcommand*{#1}{%
