@@ -6,8 +6,6 @@
 % Page layout
 \usepackage[body={28pc,56pc},marginparsep=1pc,marginparwidth=12pc,%showframe,
   includemp,hmarginratio=1:1,vmarginratio=1:2]{geometry}
-\usepackage{marginfix}% ``fix'' margins and put a header over the first margin
-\AtBeginDocument{\marginpar{\T\centering ((notes\char"0020\&\char"0020 ideas))}}
 
 % Font size and leading (defaults: http://en.wikibooks.org/wiki/LaTeX/Fonts#Sizing_text)
 \renewcommand\tiny{\fontsize{6}{9}\selectfont}
@@ -31,11 +29,24 @@
 \newfontface\O{EspinosaNova-Ornaments}
 \newfontface\T[Letters=SmallCaps]{EspinosaNova-Titling}
 
-% Misc typography
-\frenchspacing
-\setlength{\emergencystretch}{2pt}
-\usepackage{sectsty}
+% Title, section and basic paragraph typography
+\usepackage{titling}% titles
+\pretitle{\begin{center}\LARGE\scshape}
+ \posttitle{\par\end{center}\vskip 0.5em}
+ \preauthor{\begin{center}\bfseries
+            \large \lineskip 0.5em%
+            \begin{tabular}[t]{c}}
+ \postauthor{\end{tabular}\par\end{center}}
+ \predate{\begin{center}\large\itshape}
+ \postdate{\par\end{center}}
+\usepackage{sectsty}% sections
 \allsectionsfont{\sffamily}
+\setlength{\emergencystretch}{2pt}% paragraphs
+\frenchspacing
+
+% Make use of the margins
+\usepackage{marginfix}% ``fix'' margins and put a header over the first margin
+\AtBeginDocument{\marginpar{\T\centering ((notes\char"0020\&\char"0020 ideas))}}
 
 % Colo(u)r
 \usepackage{xcolor}
@@ -80,9 +91,9 @@
   }%
 }
 
-\title{\addfontfeatures{Letters=SmallCaps} The Heavens and the Earth}
-\author{\bfseries Genesis 1 \and \bfseries Psalm 104}
-\date{\itshape Lecture 1 • Genesis 1 \& Psalms 8, 74, 104}
+\title{The Heavens and the Earth}
+\author{Genesis 1 \and Psalm 104}
+\date{Lecture 1 • Genesis 1 \& Psalms 8, 74, 104}
 
 \usepackage{lipsum}
 
