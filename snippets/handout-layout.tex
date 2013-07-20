@@ -4,7 +4,7 @@
 \documentclass[11pt,twoside]{article}
 
 % Page layout
-\usepackage[body={28pc,56pc},marginparsep=1pc,marginparwidth=12pc,showframe,
+\usepackage[body={28pc,56pc},marginparsep=1pc,marginparwidth=12pc,%showframe,
   includemp,hmarginratio=1:1,vmarginratio=1:2]{geometry}
 
 % Font size and leading (defaults: http://en.wikibooks.org/wiki/LaTeX/Fonts#Sizing_text)
@@ -56,7 +56,7 @@
 \newcommand{\nb}{\marginnote[% pointer command: \nb
   \sffamily\huge\char"EA3D\kern-1.7pt]{%
   \sffamily\huge\kern-1.5pt\char"EA3E}}%
-\newcommand{\reminder}{\marginnote[% reminder command: \reminder
+\newcommand{\nbalt}{\marginnote[% pointer + reminder: \nbalt
   \sffamily\huge\char"EA4D\kern-1.7pt]{%
   \sffamily\huge\kern-1.5pt\char"EA4E}}%
 \newcommand{\thebird}{\marginnote[% and for special use: \thebird
