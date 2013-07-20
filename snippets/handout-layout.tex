@@ -46,8 +46,11 @@
 \frenchspacing
 
 % Make use of the margins
-\usepackage{marginfix}% ``fix'' margins and put a header over the first margin
-\AtBeginDocument{\marginpar{\centering\T\large ((notes\char"0020\&\char"0020 ideas))}}
+\usepackage{marginfix}% intended placement of the next line chokes without this ``fix''
+\AtBeginDocument{\marginpar{\centering\T\large ((notes\char"0020\&\char"0020 ideas))}}% put in a header
+\newcommand{\aside}[1]{\marginpar{\sffamily\footnotesize\raggedright\parindent=1em\noindent #1}}% \aside command
+\usepackage{marginnote}% more precise vertical alignment
+\newcommand{\nb}{\marginnote[\Large\O p]{\Large\O o}[1ex]}% \nb command
 
 % Colo(u)r
 \usepackage{xcolor}
@@ -107,20 +110,24 @@ of Genesis, first published at Marburg in 1530, just six years before he was str
 Candy gummi bears jelly-o toffee. Biscuit chocolate bar brownie chupa chups applicake. Danish halvah soufflé. Macaroon jelly oat cake dragée jelly beans pastry jelly beans brownie. Pudding sugar plum gummi bears candy applicake sugar plum jelly-o. Jelly cupcake tootsie roll liquorice bear claw sweet cheesecake. Tiramisu ice cream bear claw jujubes. Oat cake powder danish.
 Ice cream topping chocolate cake. Halvah gingerbread oat cake toffee jelly beans jelly ice cream jujubes. Brownie gummies apple pie tart cotton candy jujubes cotton candy sesame snaps jelly. Toffee biscuit muffin cookie caramels topping. Topping powder candy canes oat cake danish cookie. Cake dessert lollipop tiramisu wafer dessert.
 
-\marginpar{\raggedright\sffamily\footnotesize Jelly candy canes lemon drops muffin dessert fruitcake fruitcake tootsie roll. Ice cream macaroon oat cake croissant cheesecake bonbon. Tootsie roll bear claw jelly. Apple pie cotton candy halvah chocolate muffin jelly-o. Dragée dragée caramels pie tiramisu pastry chupa chups icing jelly-o. Ice cream tootsie roll apple pie tiramisu wafer. Toffee cookie wafer caramels chocolate cake macaroon. Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon.}
+\aside{Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon.}
 
 \section{New Section, Sans Versal}
 
 Jelly candy canes lemon drops muffin dessert fruitcake fruitcake tootsie roll. Ice cream macaroon oat cake croissant cheesecake bonbon. Tootsie roll bear claw jelly. Apple pie cotton candy halvah chocolate muffin jelly-o. Dragée dragée caramels pie tiramisu pastry chupa chups icing jelly-o. Ice cream tootsie roll apple pie tiramisu wafer. Toffee cookie wafer caramels chocolate cake macaroon. Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon.
 Danish cookie icing liquorice pie gummi bears jelly-o topping. Pastry sweet liquorice wafer jelly lemon drops. Tootsie roll lollipop oat cake wafer jujubes tiramisu sweet. Muffin chupa chups pastry icing topping. Jelly pastry cake candy canes.
 
-\lipsum[1-3]
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. \nb Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. \nb Donec vehicula augue eu neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris ut leo. Cras viverra metus rhoncus sem. Nulla et lectus vestibulum urna fringilla ultrices. Phasellus eu tellus sit amet tortor gravida placerat. Integer sapien est, iaculis in, pretium quis, viverra ac, nunc. Praesent eget sem vel leo ultrices bibendum. Aenean faucibus. Morbi dolor nulla, malesuada eu, pulvinar at, mollis ac, nulla. Curabitur auctor semper nulla. Donec varius orci eget risus. Duis nibh mi, congue eu, accumsan eleifend, sagittis quis, diam. Duis eget orci sit amet orci dignissim rutrum.
+
+\lipsum[2-3]
 
 \section{Creation from Nothing (\emph{creatio ex nihilo})?}
 
+\aside{Danish cookie icing liquorice pie gummi bears jelly-o topping. Pastry sweet liquorice wafer jelly lemon drops. Tootsie roll lollipop oat cake wafer jujubes tiramisu sweet. Muffin chupa chups pastry icing topping. Jelly pastry cake candy canes.}
+
 \lipsum[4-6]
 
-\marginpar{\raggedright\sffamily\small Jelly candy canes lemon drops muffin dessert fruitcake fruitcake tootsie roll. Ice cream macaroon oat cake croissant cheesecake bonbon. Tootsie roll bear claw jelly. Apple pie cotton candy halvah chocolate muffin jelly-o. Dragée dragée caramels pie tiramisu pastry chupa chups icing jelly-o. Ice cream tootsie roll apple pie tiramisu wafer. Toffee cookie wafer caramels chocolate cake macaroon. Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon.
+\aside{Jelly candy canes lemon drops muffin dessert fruitcake fruitcake tootsie roll. Ice cream macaroon oat cake croissant cheesecake bonbon. Tootsie roll bear claw jelly. Apple pie cotton candy halvah chocolate muffin jelly-o. Dragée dragée caramels pie tiramisu pastry chupa chups icing jelly-o. Ice cream tootsie roll apple pie tiramisu wafer. Toffee cookie wafer caramels chocolate cake macaroon. Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon.
 
 Danish cookie icing liquorice pie gummi bears jelly-o topping. Pastry sweet liquorice wafer jelly lemon drops. Tootsie roll lollipop oat cake wafer jujubes tiramisu sweet. Muffin chupa chups pastry icing topping. Jelly pastry cake candy canes.}
 
