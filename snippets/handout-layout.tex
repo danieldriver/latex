@@ -1,62 +1,45 @@
-%!TEX TS-program = XeLaTeX
+%!TEX TS-program = xelatex
 %!TEX encoding = UTF-8 Unicode
 
-\documentclass[10pt]{article}
+\documentclass[twoside]{article}
+
+% Page layout
 \usepackage{geometry}
+\geometry{letterpaper,body={28pc,56pc},marginparsep=1pc,marginparwidth=12pc,includemp,hmarginratio=1:1}
+\AtBeginDocument{\marginpar{\T\centering ((notes\char"0020\&\char"0020 ideas))}}% label marginpar column
+%\usepackage{show frame}
 
-\usepackage{ifthen}
-\makeatletter
-\ifthenelse{\@ptsize = 0}{% defaults: http://en.wikibooks.org/wiki/LaTeX/Fonts#Sizing_text
-  \renewcommand\tiny{\fontsize{6}{9}\selectfont}
-  \renewcommand\scriptsize{\fontsize{7}{10}\selectfont}
-  \renewcommand\footnotesize{\fontsize{8}{11}\selectfont}
-  \renewcommand\small{\fontsize{9}{12}\selectfont}
-  \renewcommand\normalsize{\fontsize{10}{12}\selectfont}% 10pt base size
-  \renewcommand\large{\fontsize{12}{14}\selectfont}
-  \renewcommand\Large{\fontsize{14}{16}\selectfont}
-  \renewcommand\LARGE{\fontsize{16}{18}\selectfont}
-  \renewcommand\huge{\fontsize{18}{20}\selectfont}
-  \renewcommand\Huge{\fontsize{21}{23}\selectfont}
-    \newcommand\HUGE{\fontsize{24}{26}\selectfont}
-}{}
-\ifthenelse{\@ptsize = 1}{
-  \renewcommand\tiny{\fontsize{7}{10}\selectfont}
-  \renewcommand\scriptsize{\fontsize{8}{11}\selectfont}
-  \renewcommand\footnotesize{\fontsize{9}{12}\selectfont}
-  \renewcommand\small{\fontsize{10}{12}\selectfont}
-  \renewcommand\normalsize{\fontsize{11}{13}\selectfont}% 11pt base size
-  \renewcommand\large{\fontsize{12}{14}\selectfont}
-  \renewcommand\Large{\fontsize{14}{16}\selectfont}
-  \renewcommand\LARGE{\fontsize{18}{20}\selectfont}
-  \renewcommand\huge{\fontsize{24}{26}\selectfont}
-  \renewcommand\Huge{\fontsize{30}{32}\selectfont}
-    \newcommand\HUGE{\fontsize{36}{38}\selectfont}
-}{}
-\ifthenelse{\@ptsize = 2}{
-  \renewcommand\tiny{\fontsize{8}{11}\selectfont}
-  \renewcommand\scriptsize{\fontsize{9}{12}\selectfont}
-  \renewcommand\footnotesize{\fontsize{10}{13}\selectfont}
-  \renewcommand\small{\fontsize{11}{14}\selectfont}
-  \renewcommand\normalsize{\fontsize{12}{14}\selectfont}% 12pt base size
-  \renewcommand\large{\fontsize{14}{16}\selectfont}
-  \renewcommand\Large{\fontsize{18}{20}\selectfont}
-  \renewcommand\LARGE{\fontsize{24}{26}\selectfont}
-  \renewcommand\huge{\fontsize{30}{32}\selectfont}
-  \renewcommand\Huge{\fontsize{36}{38}\selectfont}
-    \newcommand\HUGE{\fontsize{48}{50}\selectfont}
-}{}
-\makeatother
+% Font size and leading (defaults: http://en.wikibooks.org/wiki/LaTeX/Fonts#Sizing_text)
+\renewcommand\tiny{\fontsize{6}{9}\selectfont}
+\renewcommand\scriptsize{\fontsize{7}{10}\selectfont}
+\renewcommand\footnotesize{\fontsize{8}{11}\selectfont}
+\renewcommand\small{\fontsize{9}{12}\selectfont}
+\renewcommand\normalsize{\fontsize{10}{13}\selectfont}% 10pt base size
+\renewcommand\large{\fontsize{12}{14}\selectfont}
+\renewcommand\Large{\fontsize{14}{16}\selectfont}
+\renewcommand\LARGE{\fontsize{16}{18}\selectfont}
+\renewcommand\huge{\fontsize{18}{20}\selectfont}
+\renewcommand\Huge{\fontsize{21}{23}\selectfont}
 
-\usepackage{color}
-\newcommand\red[1]{\color{red} #1}
-
-\usepackage{fontspec,xltxtra}
+% Basic fontspec setup
+\usepackage{fontspec}
 \setmainfont[Ligatures=TeX,
   ItalicFont = EspinosaNova-Italic,
     BoldFont = EspinosaNova-RotundaBoldAlt]{Espinosa Nova}
 \setsansfont[Ligatures=TeX]{Scala Sans Pro}
 \setmonofont[Scale=MatchLowercase]{Menlo}
+\newfontface\O{EspinosaNova-Ornaments}
+\newfontface\T[Letters=SmallCaps]{EspinosaNova-Titling}
+
+% Misc typography
 \frenchspacing
+\setlength{\emergencystretch}{2pt}
+\usepackage{sectsty}
+\allsectionsfont{\sffamily}
+
+% Colo(u)r
+\usepackage{xcolor}
+\newcommand\red[1]{\color{purple} #1}
 
 % provide \versal, a drop cap macro that can be read from a pandoc source (and ignored in HTML output)
 \usepackage{lettrine}
@@ -105,9 +88,11 @@
 % Note that footmisc needs some hyperref links to notes switched off, eg:
 % \usepackage[hyperfootnotes=false,...]{hyperref}
 
-\title{Brief Article}
-\author{The Author}
-%\date{}
+\title{\addfontfeatures{Letters=SmallCaps} The Heavens and the Earth}
+\author{\bfseries Genesis 1 \and \bfseries Psalm 104}
+\date{\itshape Lecture 1 • Genesis 1 \& Psalms 8, 74, 104}
+
+\usepackage{lipsum}
 
 \begin{document}
 \maketitle
@@ -118,9 +103,23 @@ of Genesis, first published at Marburg in 1530, just six years before he was str
 Candy gummi bears jelly-o toffee. Biscuit chocolate bar brownie chupa chups applicake. Danish halvah soufflé. Macaroon jelly oat cake dragée jelly beans pastry jelly beans brownie. Pudding sugar plum gummi bears candy applicake sugar plum jelly-o. Jelly cupcake tootsie roll liquorice bear claw sweet cheesecake. Tiramisu ice cream bear claw jujubes. Oat cake powder danish.
 Ice cream topping chocolate cake. Halvah gingerbread oat cake toffee jelly beans jelly ice cream jujubes. Brownie gummies apple pie tart cotton candy jujubes cotton candy sesame snaps jelly. Toffee biscuit muffin cookie caramels topping. Topping powder candy canes oat cake danish cookie. Cake dessert lollipop tiramisu wafer dessert.
 
-\section{New Section, Sans Quotation Marks}
+\marginpar{\raggedright\sffamily\small Jelly candy canes lemon drops muffin dessert fruitcake fruitcake tootsie roll. Ice cream macaroon oat cake croissant cheesecake bonbon. Tootsie roll bear claw jelly. Apple pie cotton candy halvah chocolate muffin jelly-o. Dragée dragée caramels pie tiramisu pastry chupa chups icing jelly-o. Ice cream tootsie roll apple pie tiramisu wafer. Toffee cookie wafer caramels chocolate cake macaroon. Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon.}
 
-\versal Jelly candy canes lemon drops muffin dessert fruitcake fruitcake tootsie roll. Ice cream macaroon oat cake croissant cheesecake bonbon. Tootsie roll bear claw jelly. Apple pie cotton candy halvah chocolate muffin jelly-o. Dragée dragée caramels pie tiramisu pastry chupa chups icing jelly-o. Ice cream tootsie roll apple pie tiramisu wafer. Toffee cookie wafer caramels chocolate cake macaroon. Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon.
+\section{New Section, Sans Versal}
+
+Jelly candy canes lemon drops muffin dessert fruitcake fruitcake tootsie roll. Ice cream macaroon oat cake croissant cheesecake bonbon. Tootsie roll bear claw jelly. Apple pie cotton candy halvah chocolate muffin jelly-o. Dragée dragée caramels pie tiramisu pastry chupa chups icing jelly-o. Ice cream tootsie roll apple pie tiramisu wafer. Toffee cookie wafer caramels chocolate cake macaroon. Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon.
 Danish cookie icing liquorice pie gummi bears jelly-o topping. Pastry sweet liquorice wafer jelly lemon drops. Tootsie roll lollipop oat cake wafer jujubes tiramisu sweet. Muffin chupa chups pastry icing topping. Jelly pastry cake candy canes.
+
+\lipsum[1-3]
+
+\section{Creation from Nothing (\emph{creatio ex nihilo})?}
+
+\lipsum[4-6]
+
+\marginpar{\raggedright\sffamily\small Jelly candy canes lemon drops muffin dessert fruitcake fruitcake tootsie roll. Ice cream macaroon oat cake croissant cheesecake bonbon. Tootsie roll bear claw jelly. Apple pie cotton candy halvah chocolate muffin jelly-o. Dragée dragée caramels pie tiramisu pastry chupa chups icing jelly-o. Ice cream tootsie roll apple pie tiramisu wafer. Toffee cookie wafer caramels chocolate cake macaroon. Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon.
+
+Danish cookie icing liquorice pie gummi bears jelly-o topping. Pastry sweet liquorice wafer jelly lemon drops. Tootsie roll lollipop oat cake wafer jujubes tiramisu sweet. Muffin chupa chups pastry icing topping. Jelly pastry cake candy canes.}
+
+\lipsum[1]
 
 \end{document}  
