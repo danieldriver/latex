@@ -1,33 +1,34 @@
 %!TEX TS-program = xelatex
 %!TEX encoding = UTF-8 Unicode
 
-\documentclass[twoside]{article}
+\documentclass[11pt,twoside]{article}
 
 % Page layout
 \usepackage[body={28pc,56pc},marginparsep=1pc,marginparwidth=12pc,%showframe,
   includemp,hmarginratio=1:1,vmarginratio=1:2]{geometry}
 
 % Font size and leading (defaults: http://en.wikibooks.org/wiki/LaTeX/Fonts#Sizing_text)
-\renewcommand\tiny{\fontsize{6}{9}\selectfont}
-\renewcommand\scriptsize{\fontsize{7}{10}\selectfont}
-\renewcommand\footnotesize{\fontsize{8}{11}\selectfont}
-\renewcommand\small{\fontsize{9}{12}\selectfont}
-\renewcommand\normalsize{\fontsize{10}{13}\selectfont}% 10pt base size
+\renewcommand\tiny{\fontsize{7}{10}\selectfont}
+\renewcommand\scriptsize{\fontsize{8}{11}\selectfont}
+\renewcommand\footnotesize{\fontsize{9}{12}\selectfont}
+\renewcommand\small{\fontsize{10}{13}\selectfont}
+\renewcommand\normalsize{\fontsize{11}{13.6}\selectfont}% 11pt base size
 \renewcommand\large{\fontsize{12}{14}\selectfont}
 \renewcommand\Large{\fontsize{14}{16}\selectfont}
-\renewcommand\LARGE{\fontsize{16}{18}\selectfont}
-\renewcommand\huge{\fontsize{18}{20}\selectfont}
-\renewcommand\Huge{\fontsize{21}{23}\selectfont}
+\renewcommand\LARGE{\fontsize{18}{20}\selectfont}
+\renewcommand\huge{\fontsize{24}{26}\selectfont}
+\renewcommand\Huge{\fontsize{30}{32}\selectfont}
 
 % Basic fontspec setup
 \usepackage{fontspec}
-\setmainfont[Ligatures=TeX,
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont[%
   ItalicFont = EspinosaNova-Italic,
     BoldFont = EspinosaNova-RotundaBoldAlt]{Espinosa Nova}
-\setsansfont[Ligatures=TeX]{Scala Sans Pro}
+\setsansfont{Scala Sans Pro}
 \setmonofont[Scale=MatchLowercase]{Menlo}
-\newfontface\O{EspinosaNova-Ornaments}
-\newfontface\T[Letters=SmallCaps]{EspinosaNova-Titling}
+  \newfontface\O{EspinosaNova-Ornaments}
+  \newfontface\T[Letters=SmallCaps]{EspinosaNova-Titling}
 
 % Title, section and basic paragraph typography
 \usepackage{titling}% titles
@@ -46,7 +47,7 @@
 
 % Make use of the margins
 \usepackage{marginfix}% ``fix'' margins and put a header over the first margin
-\AtBeginDocument{\marginpar{\T\centering ((notes\char"0020\&\char"0020 ideas))}}
+\AtBeginDocument{\marginpar{\centering\T\large ((notes\char"0020\&\char"0020 ideas))}}
 
 % Colo(u)r
 \usepackage{xcolor}
@@ -100,13 +101,13 @@
 \begin{document}
 \maketitle
 
-\versal ``In the begynnynge God created heaven and erth.'' Thus begins {\bf William Tyndale's} translation 
+\versal ``In the begynnynge God created heaven and erth.'' Thus begins {\bfseries William Tyndale's} translation
 of Genesis, first published at Marburg in 1530, just six years before he was strangled and burnt at the stake for heresy. Ironically, Tyndale's work would make its way into the King James Bible. ``In the beginning God created the heaven and the earth.'' Gummies candy fruitcake. Bear claw gummi bears wafer pudding croissant gingerbread. Apple pie apple pie halvah marshmallow cupcake apple pie liquorice toffee muffin. Macaroon oat cake gummi bears carrot cake cake. Dragée cheesecake NERDIES cake. Donut chocolate bar gummi bears wafer carrot cake chocolate cupcake lollipop. Dragée chocolate bar tart candy caramels. Chocolate chupa chups caramels. Gingerbread lemon drops ice cream dragée jujubes jelly cake chupa chups caramels.
 
 Candy gummi bears jelly-o toffee. Biscuit chocolate bar brownie chupa chups applicake. Danish halvah soufflé. Macaroon jelly oat cake dragée jelly beans pastry jelly beans brownie. Pudding sugar plum gummi bears candy applicake sugar plum jelly-o. Jelly cupcake tootsie roll liquorice bear claw sweet cheesecake. Tiramisu ice cream bear claw jujubes. Oat cake powder danish.
 Ice cream topping chocolate cake. Halvah gingerbread oat cake toffee jelly beans jelly ice cream jujubes. Brownie gummies apple pie tart cotton candy jujubes cotton candy sesame snaps jelly. Toffee biscuit muffin cookie caramels topping. Topping powder candy canes oat cake danish cookie. Cake dessert lollipop tiramisu wafer dessert.
 
-\marginpar{\raggedright\sffamily\small Jelly candy canes lemon drops muffin dessert fruitcake fruitcake tootsie roll. Ice cream macaroon oat cake croissant cheesecake bonbon. Tootsie roll bear claw jelly. Apple pie cotton candy halvah chocolate muffin jelly-o. Dragée dragée caramels pie tiramisu pastry chupa chups icing jelly-o. Ice cream tootsie roll apple pie tiramisu wafer. Toffee cookie wafer caramels chocolate cake macaroon. Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon.}
+\marginpar{\raggedright\sffamily\footnotesize Jelly candy canes lemon drops muffin dessert fruitcake fruitcake tootsie roll. Ice cream macaroon oat cake croissant cheesecake bonbon. Tootsie roll bear claw jelly. Apple pie cotton candy halvah chocolate muffin jelly-o. Dragée dragée caramels pie tiramisu pastry chupa chups icing jelly-o. Ice cream tootsie roll apple pie tiramisu wafer. Toffee cookie wafer caramels chocolate cake macaroon. Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon.}
 
 \section{New Section, Sans Versal}
 
