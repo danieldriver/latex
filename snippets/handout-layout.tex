@@ -50,18 +50,18 @@
 \AtBeginDocument{\marginpar{\centering\T\large ((notes\char"0020\&\char"0020 ideas))}}% put in a header
 \newcommand{\aside}[1]{\marginpar{\sffamily\footnotesize\raggedright\parindent=1em\noindent #1}}% \aside command
 \usepackage{marginnote}% better vertical alignment, and no fuss about r- and l-alignment
-\newcommand{\hello}{\marginnote[% handshake command: \hello
-  \sffamily\huge\char"EA14\kern-3.5pt]{%
-  \sffamily\huge\kern-3.1pt\char"EA14}}%
-\newcommand{\nb}{\marginnote[% pointer command: \nb
-  \sffamily\huge\char"EA3D\kern-1.7pt]{%
-  \sffamily\huge\kern-1.5pt\char"EA3E}}%
+\newcommand{\handshake}{{\fontspec{Scala Sans Pro}\Large\symbol{"EA14}}}
+\newcommand{\hello}[1]{\marginnote{% new person / concept macro: \hello{name or concept}
+  \sffamily\footnotesize\mbox{\kern-1.8pt\handshake #1}}}%
+\newcommand{\nb}{\marginnote[% standard marginal pointer: \nb
+  \sffamily\LARGE\char"EA3D\kern-1.7pt]{%
+  \sffamily\LARGE\kern-1.5pt\char"EA3E}}%
 \newcommand{\nbalt}{\marginnote[% pointer + reminder: \nbalt
-  \sffamily\huge\char"EA4D\kern-1.7pt]{%
-  \sffamily\huge\kern-1.5pt\char"EA4E}}%
+  \sffamily\LARGE\char"EA4D\kern-1.7pt]{%
+  \sffamily\LARGE\kern-1.5pt\char"EA4E}}%
 \newcommand{\thebird}{\marginnote[% and for special use: \thebird
-  \sffamily\huge\char"EA11\kern-2.6pt]{%
-  \sffamily\huge\kern-2.4pt\char"EA11}}%
+  \sffamily\LARGE\char"EA11\kern-2.6pt]{%
+  \sffamily\LARGE\kern-2.4pt\char"EA11}}%
 
 % Colo(u)r
 \usepackage[x11names,hyperref]{xcolor}
@@ -106,7 +106,7 @@
   }%
 }
 
-\title{The Heavens and the Earth}
+\title{When God Created}
 \author{Genesis 1 \and Psalm 104}
 \date{Lecture 1 • Genesis 1 \& Psalms 8, 74, 104}
 
@@ -115,22 +115,25 @@
 \begin{document}
 \maketitle
 
-\versal ``In the begynnynge God created heaven and erth.'' Thus begins {\bfseries William Tyndale's} translation
-of Genesis, first published at Marburg in 1530, just six years before he was strangled and burnt at the stake for heresy. Ironically, Tyndale's work would make its way into the King James Bible. ``In the beginning God created the heaven and the earth.'' Gummies candy fruitcake. Bear claw gummi bears wafer pudding croissant gingerbread. Apple pie apple pie halvah marshmallow cupcake apple pie liquorice toffee muffin. Macaroon oat cake gummi bears carrot cake cake. Dragée cheesecake NERDIES cake. Donut chocolate bar gummi bears wafer carrot cake chocolate cupcake lollipop. Dragée chocolate bar tart candy caramels. Chocolate chupa chups caramels. Gingerbread lemon drops ice cream dragée jujubes jelly cake chupa chups caramels.
+\versal ``In the begynnynge God created heaven and erth.'' Thus {\bfseries William Tyndale's} rendition of Genesis begins.
+It was first published in 1530 in Marburg, just six years before Tyndale was strangled and burnt at the stake for heresy back in England. Ironically, his translation the New Testament, and much of the Old, would become the largest single contribution to the officially approved King James Bible (1611). That version of the Bible's first sentence left a lasting mark on the English language. \textit{In the beginning God created the heaven and the earth.} Its standing, though, has quietly been challenged in a number of more recent translations.
 
-Candy gummi bears jelly-o toffee. Biscuit chocolate bar brownie chupa chups applicake. Danish halvah soufflé. Macaroon jelly oat cake dragée jelly beans pastry jelly beans brownie. Pudding sugar plum gummi bears candy applicake sugar plum jelly-o. Jelly cupcake tootsie roll liquorice bear claw sweet cheesecake. Tiramisu ice cream bear claw jujubes. Oat cake powder danish.
+Just when did God create? That is the question raised by these newer translations. The question has an ancient pedigree, too. \hello{Augustine of Hippo, 354--430}{\bfseries St. Augustine} pondered it often, and it turns up repeatedly in his works.
+
+Gummies candy fruitcake. Bear claw gummi bears wafer pudding croissant gingerbread. Apple pie apple pie halvah marshmallow cupcake apple pie liquorice toffee muffin. Macaroon oat cake gummi bears carrot cake cake. Dragée cheesecake NERDIES cake. Donut chocolate bar gummi bears wafer carrot cake chocolate cupcake lollipop. Dragée chocolate bar tart candy caramels. Chocolate chupa chups caramels. Gingerbread lemon drops ice cream dragée jujubes jelly cake chupa chups caramels.
+
+Candy gummi bears jelly-o toffee. Biscuit chocolate bar brownie chupa chups applicake. Danish halvah soufflé. Macaroon jelly oat cake dragée jelly beans pastry jelly beans brownie. Pudding sugar plum gummi bears candy applicake sugar plum jelly-o. Jelly cupcake tootsie roll liquorice bear claw sweet cheesecake. Tiramisu ice cream bear claw jujubes. Oat cake powder danish. \nb
 Ice cream topping chocolate cake. Halvah gingerbread oat cake toffee jelly beans jelly ice cream jujubes. Brownie gummies apple pie tart cotton candy jujubes cotton candy sesame snaps jelly. Toffee biscuit muffin cookie caramels topping. Topping powder candy canes oat cake danish cookie. Cake dessert lollipop tiramisu wafer dessert.
 
 \aside{Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon.}
 
 \section{New Section, Sans Versal}
 
-Jelly candy canes lemon drops muffin dessert fruitcake fruitcake tootsie roll. Ice cream macaroon oat cake croissant cheesecake bonbon. Tootsie roll bear claw jelly. Apple pie cotton candy halvah chocolate muffin jelly-o. Dragée dragée caramels pie tiramisu pastry chupa chups icing jelly-o. Ice cream tootsie roll apple pie tiramisu wafer.\hello Toffee cookie wafer caramels chocolate cake macaroon. Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon.
+Jelly candy canes lemon drops muffin dessert fruitcake fruitcake tootsie roll. Ice cream macaroon oat cake croissant cheesecake bonbon. Tootsie roll bear claw jelly. Apple pie cotton candy halvah chocolate muffin jelly-o. Dragée dragée caramels pie tiramisu pastry chupa chups icing jelly-o. Ice cream tootsie roll apple pie tiramisu wafer. Toffee cookie wafer caramels chocolate cake macaroon. Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon. \nbalt
 Danish cookie icing liquorice pie gummi bears jelly-o topping. Pastry sweet liquorice wafer jelly lemon drops. Tootsie roll lollipop oat cake wafer jujubes tiramisu sweet. Muffin chupa chups pastry icing topping. Jelly pastry cake candy canes.
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. \nb Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. \nb Donec vehicula augue eu neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris ut leo. Cras viverra metus rhoncus sem. Nulla et lectus vestibulum urna fringilla ultrices. Phasellus eu tellus sit amet tortor gravida placerat. Integer sapien est, iaculis in, pretium quis, viverra ac, nunc. Praesent eget sem vel leo ultrices bibendum. Aenean faucibus. Morbi dolor nulla, malesuada eu, pulvinar at, mollis ac, nulla. Curabitur auctor semper nulla. Donec varius orci eget risus. Duis nibh mi, congue eu, accumsan eleifend, sagittis quis, diam. Duis eget orci sit amet orci dignissim rutrum.
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. \hello{Hermann Gunkel, 1862--1932} Donec vehicula augue eu neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris ut leo. Cras viverra metus rhoncus sem. Nulla et lectus vestibulum urna fringilla ultrices. Phasellus eu tellus sit amet tortor gravida placerat. Integer sapien est, iaculis in, pretium quis, viverra ac, nunc. Praesent eget sem vel leo ultrices bibendum. Aenean faucibus. Morbi dolor nulla, malesuada eu, pulvinar at, mollis ac, nulla. Curabitur auctor semper nulla. Donec varius orci eget risus. Duis nibh mi, congue eu, accumsan eleifend, sagittis quis, diam. Duis eget orci sit amet orci dignissim rutrum.
 
-\hello
 \lipsum[2-3]
 
 \section{Creation from Nothing (\emph{creatio ex nihilo})?}
