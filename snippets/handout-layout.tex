@@ -47,28 +47,23 @@
 \setlength{\emergencystretch}{3pt}% latitude to justify paragraphs
 \frenchspacing% in exchange for single sentence spacing
 
-% Make use of the margins
+% Put Scala Sans to work in the margins
 \newcommand\marginalia{\sffamily\footnotesize}
-\newcommand\hands{\fontspec{Scala Sans Pro}\LARGE}
-\newcommand{\aside}[1]{% \aside command
-  \marginpar{\marginalia\raggedright\parindent=1em\noindent #1}}
+\newcommand\hands{\sffamily\LARGE}
+\newcommand{\aside}[1]{% format a simple margin note: \aside{}
+  \marginpar{\marginalia\raggedright\parindent=1em\noindent#1}}
 \newsavebox\shake% box up a handshake
   \savebox{\shake}[22pt][c]{\hands\raisebox{-1pt}{\char"EA14}}
-\newcommand{\hello}[1]{\marginpar[% introduce a person with \hello{name, date}
-  \hfill{\makebox[0pt][r]{\marginalia\scshape#1}}~\usebox{\shake}]{%
-  \usebox{\shake}~\mbox{\marginalia\scshape#1}}}
-
-\usepackage{marginnote}% better vertical alignment, and no fuss about r- and l-alignment
-% tk -- move all of the following over to marginpar + boxes 
-\newcommand{\nb}{\marginnote[% standard marginal pointer: \nb
-  \hands\hfill\char"EA3D\kern-1.7pt]{%
-  \hands\kern-1.5pt\char"EA3E}}%
-\newcommand{\nbalt}{\marginnote[% pointer + reminder: \nbalt
-  \hands\hfill\char"EA4D\kern-1.7pt]{%
-  \hands\kern-1.5pt\char"EA4E}}%
-\newcommand{\thebird}{\marginnote[% and for special use: \thebird
-  \hands\hfill\char"EA11\kern-2.6pt]{%
-  \hands\kern-2.4pt\char"EA11}}%
+\newcommand{\hello}[1]{\marginpar[% introduce a person with \hello{name, dates}
+  \hfill{\makebox[0pt][r]{\marginalia\scshape#1}}~\usebox\shake]{%
+  \usebox\shake~\mbox{\marginalia\scshape#1}}}
+\newcommand\pointer[1]{% box up variable pointer fingers
+  \makebox[16pt][c]{\hands\raisebox{-2pt}{\char"#1}}}
+\newcommand{\nb}{\marginpar[\hfill\pointer{EA3D}]{\pointer{EA3E}}}% standard pointer: \nb
+\newcommand{\nbalt}{\marginpar[\hfill\pointer{EA4D}]{\pointer{EA4E}}}% reminder: \nbalt
+\newsavebox\finger% box up the finger
+  \savebox{\finger}[9pt][c]{\hands{\char"EA11}}
+\newcommand{\thebird}{\marginpar[\hfill\usebox\finger]{\usebox\finger}}% for enemies
 
 % Colo(u)r
 \usepackage[x11names,hyperref]{xcolor}
