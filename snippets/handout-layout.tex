@@ -31,36 +31,44 @@
   \newfontface\T[Letters=SmallCaps]{EspinosaNova-Titling}
 
 % Title, section and basic paragraph typography
-\usepackage{titling}% titles
-\pretitle{\begin{center}\LARGE\scshape}
- \posttitle{\par\end{center}\vskip 0.5em}
- \preauthor{\begin{center}\bfseries
-            \large \lineskip 0.5em%
-            \begin{tabular}[t]{c}}
- \postauthor{\end{tabular}\par\end{center}}
- \predate{\begin{center}\large\itshape}
- \postdate{\par\end{center}}
-\usepackage{sectsty}% sections
-\allsectionsfont{\sffamily}
-\setlength{\emergencystretch}{2pt}% paragraphs
-\frenchspacing
+\usepackage{titling}% customize the maketitle command
+  \renewcommand\maketitlehooka{% notes column heading
+          \marginpar{\vspace*{-33pt}\centering\T\large((notes))}}
+  \pretitle{\begin{center}\LARGE\scshape}
+  \posttitle{\par\end{center}\vskip 0.5em}
+  \preauthor{\begin{center}\bfseries
+          \large \lineskip 0.5em%
+          \begin{tabular}[t]{c}}
+  \postauthor{\end{tabular}\par\end{center}}
+  \predate{\begin{center}\large\itshape}
+  \postdate{\par\end{center}}
+\usepackage{sectsty}% customize section headings
+  \allsectionsfont{\sffamily}
+\setlength{\emergencystretch}{3pt}% latitude to justify paragraphs
+\frenchspacing% in exchange for single sentence spacing
 
 % Make use of the margins
-\renewcommand{\maketitlehooka}{\marginpar{\vspace*{-33pt}\centering\T\large((notes))}} % heading
-\newcommand{\aside}[1]{\marginpar{\sffamily\footnotesize\raggedright\parindent=1em\noindent #1}}% \aside command
+\newcommand\marginalia{\sffamily\footnotesize}
+\newcommand\hands{\fontspec{Scala Sans Pro}\LARGE}
+\newcommand{\aside}[1]{% \aside command
+  \marginpar{\marginalia\raggedright\parindent=1em\noindent #1}}
+\newsavebox\shake% box up a handshake
+  \savebox{\shake}[22pt][c]{\hands\raisebox{-1pt}{\char"EA14}}
+\newcommand{\hello}[1]{\marginpar[% introduce a person with \hello{name, date}
+  \hfill{\makebox[0pt][r]{\marginalia\scshape#1}}~\usebox{\shake}]{%
+  \usebox{\shake}~\mbox{\marginalia\scshape#1}}}
+
 \usepackage{marginnote}% better vertical alignment, and no fuss about r- and l-alignment
-\newcommand{\handshake}{{\fontspec{Scala Sans Pro}\LARGE\symbol{"EA14}}}
-\newcommand{\hello}[1]{\marginnote{% new person / concept macro: \hello{name or concept}
-  \sffamily\footnotesize\mbox{\kern-1.8pt\handshake #1}}}%
+% tk -- move all of the following over to marginpar + boxes 
 \newcommand{\nb}{\marginnote[% standard marginal pointer: \nb
-  \sffamily\LARGE\char"EA3D\kern-1.7pt]{%
-  \sffamily\LARGE\kern-1.5pt\char"EA3E}}%
+  \hands\hfill\char"EA3D\kern-1.7pt]{%
+  \hands\kern-1.5pt\char"EA3E}}%
 \newcommand{\nbalt}{\marginnote[% pointer + reminder: \nbalt
-  \sffamily\LARGE\char"EA4D\kern-1.7pt]{%
-  \sffamily\LARGE\kern-1.5pt\char"EA4E}}%
+  \hands\hfill\char"EA4D\kern-1.7pt]{%
+  \hands\kern-1.5pt\char"EA4E}}%
 \newcommand{\thebird}{\marginnote[% and for special use: \thebird
-  \sffamily\LARGE\char"EA11\kern-2.6pt]{%
-  \sffamily\LARGE\kern-2.4pt\char"EA11}}%
+  \hands\hfill\char"EA11\kern-2.6pt]{%
+  \hands\kern-2.4pt\char"EA11}}%
 
 % Colo(u)r
 \usepackage[x11names,hyperref]{xcolor}
@@ -131,7 +139,7 @@ Ice cream topping chocolate cake. Halvah gingerbread oat cake toffee jelly beans
 Jelly candy canes lemon drops muffin dessert fruitcake fruitcake tootsie roll. Ice cream macaroon oat cake croissant cheesecake bonbon. Tootsie roll bear claw jelly. Apple pie cotton candy halvah chocolate muffin jelly-o. Dragée dragée caramels pie tiramisu pastry chupa chups icing jelly-o. Ice cream tootsie roll apple pie tiramisu wafer. Toffee cookie wafer caramels chocolate cake macaroon. Tootsie roll tiramisu topping bear claw danish tootsie roll dragée dragée. Caramels jujubes dessert pastry jelly beans. Lollipop cupcake marshmallow bonbon liquorice bonbon. \nbalt
 Danish cookie icing liquorice pie gummi bears jelly-o topping. Pastry sweet liquorice wafer jelly lemon drops. Tootsie roll lollipop oat cake wafer jujubes tiramisu sweet. Muffin chupa chups pastry icing topping. Jelly pastry cake candy canes.
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. \hello{Hermann Gunkel, 1862--1932} Donec vehicula augue eu neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris ut leo. Cras viverra metus rhoncus sem. Nulla et lectus vestibulum urna fringilla ultrices. Phasellus eu tellus sit amet tortor gravida placerat. Integer sapien est, iaculis in, pretium quis, viverra ac, nunc. Praesent eget sem vel leo ultrices bibendum. Aenean faucibus. Morbi dolor nulla, malesuada eu, pulvinar at, mollis ac, nulla. Curabitur auctor semper nulla. Donec varius orci eget risus. Duis nibh mi, congue eu, accumsan eleifend, sagittis quis, diam. Duis eget orci sit amet orci dignissim rutrum.
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. According to \hello{Hermann Gunkel, 1862--1932}\textbf{H. Gunkel}, donec vehicula augue eu neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris ut leo. Cras viverra metus rhoncus sem. Nulla et lectus vestibulum urna fringilla ultrices. Phasellus eu tellus sit amet tortor gravida placerat. Integer sapien est, iaculis in, pretium quis, viverra ac, nunc. Praesent eget sem vel leo ultrices bibendum. Aenean faucibus. Morbi dolor nulla, malesuada eu, pulvinar at, mollis ac, nulla. Curabitur auctor semper nulla. Donec varius orci eget risus. Duis nibh mi, congue eu, accumsan eleifend, sagittis quis, diam. Duis eget orci sit amet orci dignissim rutrum.
 
 \lipsum[2-3]
 
