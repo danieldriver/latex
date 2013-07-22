@@ -46,8 +46,7 @@
 \frenchspacing
 
 % Make use of the margins
-\usepackage{marginfix}% intended placement of the next line chokes without this ``fix''
-\AtBeginDocument{\marginpar{\centering\T\large ((notes))}}% put in a header
+\renewcommand{\maketitlehooka}{\marginpar{\vspace*{-33pt}\centering\T\large((notes))}} % heading
 \newcommand{\aside}[1]{\marginpar{\sffamily\footnotesize\raggedright\parindent=1em\noindent #1}}% \aside command
 \usepackage{marginnote}% better vertical alignment, and no fuss about r- and l-alignment
 \newcommand{\handshake}{{\fontspec{Scala Sans Pro}\LARGE\symbol{"EA14}}}
