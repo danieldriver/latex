@@ -1,0 +1,74 @@
+% !TEX TS-program = XeLaTeX
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt,twoside]{article}
+
+% Page layout
+\usepackage[body={28pc,56pc},marginparsep=1pc,marginparwidth=12pc,%showframe,
+  includemp,hmarginratio=1:1,vmarginratio=1:2]{geometry}
+
+% Font size and leading (defaults: http://en.wikibooks.org/wiki/LaTeX/Fonts#Sizing_text)
+\renewcommand\tiny{\fontsize{7}{10}\selectfont}
+\renewcommand\scriptsize{\fontsize{8}{11}\selectfont}
+\renewcommand\footnotesize{\fontsize{9}{12}\selectfont}
+\renewcommand\small{\fontsize{10}{13}\selectfont}
+\renewcommand\normalsize{\fontsize{11}{13.6}\selectfont}% 11pt base size
+\renewcommand\large{\fontsize{12}{14}\selectfont}
+\renewcommand\Large{\fontsize{14}{16}\selectfont}
+\renewcommand\LARGE{\fontsize{18}{20}\selectfont}
+\renewcommand\huge{\fontsize{24}{26}\selectfont}
+\renewcommand\Huge{\fontsize{30}{32}\selectfont}
+
+% Basic fontspec setup
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Espinosa Nova}
+\newfontface\O[StylisticSet=1]{EspinosaNova-Ornaments}% TeX ligatures should be off for ,, to work
+
+% Colo(u)r
+\usepackage[x11names,hyperref]{xcolor}
+\newcommand\red[1]{\color{Red3} #1}
+
+\usepackage{calc}
+\setlength\parindent{0pt}
+\setlength\parskip{0pt}
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{minipage}[b]{\textwidth}
+%
+\parbox[t]{66pt}{%
+%
+\frame{
+\begin{picture}(55,77)\O
+\put(0,66){1}
+\put(44,66){3}
+\put(0,0){7}
+\put(44,0){9}
+\multiput(11,66)(11,0){3}{Y}
+\multiput(0,11)(0,11){5}{y}
+\multiput(11,-0)(11,0){3}{Z}
+\multiput(44,11)(0,11){5}{z}
+\end{picture}
+%
+}}% end frame, parbox
+\parbox[t]{66pt}{% Inverted dimensions, zero size
+\frame{
+%
+\begin{picture}(55,0)\O
+\put(0,0){1}
+\put(44,0){3}
+\put(0,-66){7}
+\put(44,-66){9}
+\multiput(11,0)(11,0){3}{Y}
+\multiput(0,-11)(0,-11){5}{y}
+\multiput(11,-66)(11,0){3}{Z}
+\multiput(44,-11)(0,-11){5}{z}
+\end{picture}
+%
+}}% end frame, parbox
+%
+\end{minipage}
+
+\end{document}  
