@@ -1,0 +1,24 @@
+% Adapted from Kopka and Daly, Guide to \LaTeX, page 167
+% Cf. also the color samples in `texdoc color`
+
+\documentclass[12pt]{article}
+\usepackage[dvipsnames]{color}
+\usepackage[text={6.5in,8.5in}]{geometry}
+\usepackage{multicol}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\begin{document}
+\renewcommand*{\DefineNamedColor}[4]{%
+  \textcolor[named]{#2}{\rule{7mm}{7mm}}\quad
+  \texttt{#2}\strut\\}
+
+\begin{center}\Large Named colors in \texttt{dvipsnam.def}
+\end{center}
+
+\begin{multicols}{3}
+\input{dvipsnam.def}
+\end{multicols}
+
+\end{document}
