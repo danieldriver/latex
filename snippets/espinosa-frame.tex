@@ -34,13 +34,30 @@
 \setlength\parskip{0pt}
 \pagestyle{empty}
 
+\setlength\fboxsep{0pt}
+\setlength\fboxrule{0.001pt}
+
 \begin{document}
+
+% true size of y/z = 7x11, and of Y/Z = 11x7
+% thus, subtract 2pt from 11pt at the borders
+\fbox{%
+\begin{picture}(51,73)\O
+\put(-2,66){1}
+\put(42,66){3}
+\put(-2,0){7}
+\put(42,0){9}
+\multiput(9,66)(11,0){3}{Y}
+\multiput(-2,11)(0,11){5}{y}
+\multiput(9,0)(11,0){3}{Z}
+\multiput(42,11)(0,11){5}{z}
+\end{picture}}
 
 \begin{minipage}[b]{\textwidth}
 %
 \parbox[t]{66pt}{%
 %
-\frame{
+\fbox{%
 \begin{picture}(55,77)\O
 \put(0,66){1}
 \put(44,66){3}
@@ -48,13 +65,13 @@
 \put(44,0){9}
 \multiput(11,66)(11,0){3}{Y}
 \multiput(0,11)(0,11){5}{y}
-\multiput(11,-0)(11,0){3}{Z}
+\multiput(11,0)(11,0){3}{Z}
 \multiput(44,11)(0,11){5}{z}
 \end{picture}
 %
 }}% end frame, parbox
 \parbox[t]{66pt}{% Inverted dimensions, zero size
-\frame{
+\fbox{%
 %
 \begin{picture}(55,0)\O
 \put(0,0){1}
