@@ -46,6 +46,21 @@
 \setlength\bpad{1.892pt}
 \setlength\bheight{6\bskip}
 
+% full crenellation
+\begin{picture}(\textwidth,\bheight+\bskip-2\bpad)\O
+\put(-\bpad,0){7}% draw bottom border
+\multiput(\bskip-\bpad,0)(\bskip,0){29}{Z}
+\put(30\bskip-\bpad,0){9}
+\put(-\bpad,\bheight){1}% draw top border
+\multiput(\bskip-\bpad,\bheight)(\bskip,0){29}{Y}
+\put(30\bskip-\bpad,\bheight){3}
+\multiput(-\bpad,\bskip)(0,\bskip){5}{y}% draw left border
+\multiput(30\bskip-\bpad,\bskip)(0,\bskip){5}{z}% draw right border
+\end{picture}
+
+\medskip
+
+% half crenellation
 \begin{picture}(\textwidth,\bheight+\bskip-2\bpad)\O
 \put(-\bpad,0){7}% draw bottom border
 \multiput(\bskip-\bpad,0)(2\bskip,0){14}{Z8}
