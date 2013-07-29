@@ -23,69 +23,42 @@
 \usepackage{fontspec}
 \defaultfontfeatures{Ligatures=TeX}
 \setmainfont{Espinosa Nova}
-\newfontface\O[StylisticSet=1]{EspinosaNova-Ornaments}% TeX ligatures should be off for ,, to work
+\newfontface\O[StylisticSet=1]{EspinosaNova-Ornaments}
 
 % Colo(u)r
 \usepackage[x11names,hyperref]{xcolor}
 \newcommand\red[1]{\color{Red3} #1}
 
-\usepackage{calc}
 \setlength\parindent{0pt}
 \setlength\parskip{0pt}
 \pagestyle{empty}
 
-\setlength\fboxsep{0pt}
-\setlength\fboxrule{0.001pt}
+% the picture package allows use of dimens in the arguments of picture commands
+\usepackage{picture}
 
 \begin{document}
 
-% true size of y/z = 7x11, and of Y/Z = 11x7
-% thus, subtract 2pt from 11pt at the borders
-\fbox{%
-\begin{picture}(51,73)\O
-\put(-2,66){1}
-\put(42,66){3}
-\put(-2,0){7}
-\put(42,0){9}
-\multiput(9,66)(11,0){3}{Y}
-\multiput(-2,11)(0,11){5}{y}
-\multiput(9,0)(11,0){3}{Z}
-\multiput(42,11)(0,11){5}{z}
-\end{picture}}
+% assume 11pt base rather than calculating for any font size
+\newlength\bskip
+\newlength\bpad
+\newlength\bheight
+\setlength\bskip{10.96pt}
+\setlength\bpad{1.892pt}
+\setlength\bheight{6\bskip}
 
-\begin{minipage}[b]{\textwidth}
-%
-\parbox[t]{66pt}{%
-%
-\fbox{%
-\begin{picture}(55,77)\O
-\put(0,66){1}
-\put(44,66){3}
-\put(0,0){7}
-\put(44,0){9}
-\multiput(11,66)(11,0){3}{Y}
-\multiput(0,11)(0,11){5}{y}
-\multiput(11,0)(11,0){3}{Z}
-\multiput(44,11)(0,11){5}{z}
+\begin{picture}(\textwidth,\bheight+\bskip-2\bpad)\O
+\put(-\bpad,0){7}% draw bottom border
+\multiput(\bskip-\bpad,0)(2\bskip,0){14}{Z8}
+\put(29\bskip-\bpad,0){Z}
+\put(30\bskip-\bpad,0){9}
+\put(-\bpad,\bheight){1}% draw top border
+\multiput(\bskip-\bpad,\bheight)(2\bskip,0){14}{Y2}
+\put(29\bskip-\bpad,\bheight){Y}
+\put(30\bskip-\bpad,\bheight){3}
+\multiput(-\bpad,\bskip)(0,2\bskip){3}{y}% draw left border
+\multiput(-\bpad,2\bskip)(0,2\bskip){2}{4}
+\multiput(30\bskip-\bpad,\bskip)(0,2\bskip){3}{z}% draw right border
+\multiput(30\bskip-\bpad,2\bskip)(0,2\bskip){2}{6}
 \end{picture}
-%
-}}% end frame, parbox
-\parbox[t]{66pt}{% Inverted dimensions, zero size
-\fbox{%
-%
-\begin{picture}(55,0)\O
-\put(0,0){1}
-\put(44,0){3}
-\put(0,-66){7}
-\put(44,-66){9}
-\multiput(11,0)(11,0){3}{Y}
-\multiput(0,-11)(0,-11){5}{y}
-\multiput(11,-66)(11,0){3}{Z}
-\multiput(44,-11)(0,-11){5}{z}
-\end{picture}
-%
-}}% end frame, parbox
-%
-\end{minipage}
 
 \end{document}  
