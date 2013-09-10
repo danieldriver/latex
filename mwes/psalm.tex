@@ -1,0 +1,91 @@
+% !TEX program = xelatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass{article}
+
+% Minimal fontspec declarations
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX]{Minion Pro}
+\setsansfont[Ligatures=TeX]{Myriad Pro}
+\setmonofont[Scale=MatchLowercase]{Menlo}
+\newfontfamily{\H}{Myriad Hebrew}
+\frenchspacing
+
+% Related discussion, e.g. on <http://tex.stackexchange.com>
+% -
+% -
+
+% custom environment for psalms
+\usepackage{verse}
+\newenvironment{psalm}[1][\textwidth]{%
+  \begin{verse}[#1]}{\end{verse}}
+\newcommand\Ver[1]{\flagverse{#1}}
+\setlength\vleftskip{2em}
+\newcommand\Psalm[1]{\poemtitle{Psalm #1}}
+\newcommand\superscription[1]{\textsc{#1}\par}
+\newcommand\linein[1][01]{\begin{patverse*}\indentpattern{#1}}
+\newcommand\lineout{\end{patverse*}}
+\newcommand\LORD{\textsc{Lord}}
+
+\begin{document}
+
+
+\begin{psalm}
+\Psalm{8}
+
+\superscription{To the leader: according to The Gittith. A Psalm of David.}
+
+\linein
+\Ver{1}   O \LORD, our Sovereign,\\
+    how majestic is your name in all the earth!\\!
+\lineout
+
+\linein[0001]
+ You have set your glory above the heavens.\\
+\Ver{2}\vin Out of the mouths of babes and infants\\
+  you have founded a bulwark because of your foes,\\
+    to silence the enemy and the avenger.\\!
+\lineout
+
+\linein
+\Ver{3} When I look at your heavens, the work of your fingers,\\
+    the moon and the stars that you have established;\\
+\Ver{4}   what are human beings that you are mindful of them,\\
+    mortals that you care for them?\\!
+\lineout
+
+\linein
+\Ver{5} Yet you have made them a little lower than God,\\
+    and crowned them with glory and honor.\\
+\Ver{6}   You have given them dominion over the works of your hands;\\
+    you have put all things under their feet,\\
+\Ver{7}   all sheep and oxen,\\
+    and also the beasts of the field,\\
+\Ver{8}   the birds of the air, and the fish of the sea,\\
+    whatever passes along the paths of the seas.\\!
+\lineout
+
+\linein
+\Ver{9} O \LORD, our Sovereign,\\
+    how majestic is your name in all the earth!\\!
+\lineout
+\end{psalm}
+
+\paragraph{Steps in Vim to clean up a psalm copied from Accordance}
+
+This could undoubtedly be condensed and automated, but it works for now.
+
+\begin{verbatim}
+:%s/\%xa0//g
+:%s/\s\+$//e
+:retab
+:s/.\+$/&\\\\/g
+:s/\\\\\n\n/\\\\!\r\\lineout\r\r/g
+:s/\\\\\n\\ibref.*/\\\\!\r\\lineout/g
+:s/\s*\\Ver{0}\W\+\(.\+\)\\\\/\\superscription{\1}\r\r\\linein[01]/g
+:s/\s*\(\\*V*e*r*{*\d*}*\)\s*¶\s*/\\linein[01]\r\1 /g
+:s/LORD/\\LORD/g
+\end{verbatim}
+
+
+\end{document}
